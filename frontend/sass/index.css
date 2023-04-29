@@ -27,9 +27,6 @@ main .accountsContainer {
   justify-content: flex-end;
   margin-bottom: 2rem;
 }
-main .accountsContainer #accountForm {
-  display: flex;
-}
 main .summaryAccounts {
   display: flex;
   flex-direction: column;
@@ -38,4 +35,24 @@ main .summaryAccounts {
 }
 main .transactionsContainer {
   margin-bottom: 2rem;
+}
+main .transactionsContainer #transactionsForm .typeTransactions {
+  display: flex;
+}
+main .transactionsContainer #transactionsForm .typeTransactions fieldset {
+  border: 0;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo {
+  display: none;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory {
+  display: flex;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer {
+  display: none;
 }/*# sourceMappingURL=index.css.map */

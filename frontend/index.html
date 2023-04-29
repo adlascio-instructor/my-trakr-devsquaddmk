@@ -37,44 +37,61 @@
     <section class="transactionsContainer">
       <form id="transactionsForm" action="">
         <div class="typeTransactions">
-          New Transaction: Deposit
-          <input type="radio" />
-          Withdraw
-          <input type="radio" />
-          Transfer
-          <input type="radio" />
+          <h2>New Transaction</h2>
+          <fieldset>
+            <input id="depositTransaction" class="inputTransaction" type="radio" name="transactionType" value="deposit" checked/>
+            Deposit
+            <input id="withdrawTransaction" class="inputTransaction" type="radio" name="transactionType" value="withdraw" />
+            Withdraw
+            <input id="transferTransaction" type="radio" name="transactionType" value="transfer" />
+            Transfer
+          </fieldset>
+
         </div>
         <div class="settingsTransactions">
           <div class="settingAccount">
             <div class="accountSelect">
               Account:
-              <select></select>
+              <select id="selectionAccounts" required>
+                <option value="">Select an account</option>
+              </select>
             </div>
             <div class="fromTo">
               From:
-              <select></select>
+              <select class="fromToSelections" required>
+                <option value="">Select an account</option>
+              </select>
   
               To:
-              <select></select>
+              <select class="fromToSelections" required>
+                <option value="">Select an account</option>
+              </select>
             </div>
           </div>
           <div class="settingCategory">
-            Category:
-            <select></select>
-            <input type="text" />
-            <button type="button">Add new category</button>
+            <h2>
+              Category:
+            </h2> 
+            <select id="selectionCategory" required>
+              <option value="" selected disabled>Select a category</option>
+              <option value="newCategory">+ New Category</option>
+            </select>
+            <div class="newCategoryContainer">
+              <input id="newCategoryName" type="text" />
+              <button id="newCategoryButton" type="button">Add new category</button>
+            </div>
           </div>
           <div class="settingAmmount">
             Description
             <input type="text" />
 
             Amount:
-            <input type="number" />
+            <input type="number" required/>
           </div>
 
 
         </div>
-        <button>Add transaction</button>
+        <input type="submit" id="addTransactioninput" value="Add transaction"></input>
       </form>
     </section>
 
