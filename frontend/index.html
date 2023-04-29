@@ -1,76 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>myTrakr</title>
-    <!-- jQuery link -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-      defer
-    ></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/index.css" />
-  </head>
-  <body>
-    myTrakr
-    <main>
-      <form action="">
-        New Account:
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>myTrakr</title>
+  <!-- jQuery link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./sass/index.css" />
+</head>
+
+<body>
+  <header>
+    <h1>myTrakr</h1>
+  </header>
+  <main>
+
+    <section class="accountsContainer">
+      <form id="accountForm" action="">
+        <h1>
+          New Account:
+        </h1>
         <input type="text" />
         <button>Add new account</button>
       </form>
-      <form action="">
-        New Transaction: Deposit
-        <input type="radio" />
-        Withdraw
-        <input type="radio" />
-        Transfer
-        <input type="radio" />
-        Account:
-        <select></select>
 
-        From:
-        <select></select>
-
-        To:
-        <select></select>
-        Category:
-        <select></select>
-        <input type="text" />
-        <button type="button">Add new category</button>
-
-        Description
-        <input type="text" />
-
-        Amount:
-        <input type="number" />
-
-        <button>Add transaction</button>
-      </form>
-
-      Account summary
+    </section>
+    <section class="summaryAccounts">
+      <h1>
+        Account summary
+      </h1>
       <ul></ul>
+    </section>
+    <section class="transactionsContainer">
+      <form id="transactionsForm" action="">
+        <div class="typeTransactions">
+          <h2>New Transaction</h2>
+          <fieldset>
+            <input id="depositTransaction" class="inputTransaction" type="radio" name="transactionType" value="deposit" checked/>
+            Deposit
+            <input id="withdrawTransaction" class="inputTransaction" type="radio" name="transactionType" value="withdraw" />
+            Withdraw
+            <input id="transferTransaction" type="radio" name="transactionType" value="transfer" />
+            Transfer
+          </fieldset>
+
+        </div>
+        <div class="settingsTransactions">
+          <div class="settingAccount">
+            <div class="accountSelect">
+              Account:
+              <select id="selectionAccounts" required>
+                <option value="">Select an account</option>
+              </select>
+            </div>
+            <div class="fromTo">
+              From:
+              <select class="fromToSelections" required>
+                <option value="">Select an account</option>
+              </select>
+  
+              To:
+              <select class="fromToSelections" required>
+                <option value="">Select an account</option>
+              </select>
+            </div>
+          </div>
+          <div class="settingCategory">
+            <h2>
+              Category:
+            </h2> 
+            <select id="selectionCategory" required>
+              <option value="" selected disabled>Select a category</option>
+              <option value="newCategory">+ New Category</option>
+            </select>
+            <div class="newCategoryContainer">
+              <input id="newCategoryName" type="text" />
+              <button id="newCategoryButton" type="button">Add new category</button>
+            </div>
+          </div>
+          <div class="settingAmmount">
+            Description
+            <input type="text" />
+
+            Amount:
+            <input type="number" required/>
+          </div>
+
+
+        </div>
+        <input type="submit" id="addTransactioninput" value="Add transaction"></input>
+      </form>
+    </section>
+
+
+
+    <div class="filters">
       Filter by account:
       <select></select>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Username</th>
-          <th>Transaction Type</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>From</th>
-          <th>To</th>
-        </tr>
-      </table>
-    </main>
-    <script type="module" src="./js/helpers/Account.js" defer></script>
-    <script type="module" src="./js/helpers/Category.js" defer></script>
-    <script type="module" src="./js/helpers/Common.js" defer></script>
-    <script type="module" src="./js/helpers/Transaction.js" defer></script>
-    <script type="module" src="./js/index.js" defer></script>
-  </body>
+    </div>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Transaction Type</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>From</th>
+        <th>To</th>
+      </tr>
+    </table>
+  </main>
+  <script type="module" src="./js/helpers/Account.js" defer></script>
+  <script type="module" src="./js/helpers/Category.js" defer></script>
+  <script type="module" src="./js/helpers/Common.js" defer></script>
+  <script type="module" src="./js/helpers/Transaction.js" defer></script>
+  <script type="module" src="./js/index.js" defer></script>
+</body>
+
 </html>
