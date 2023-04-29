@@ -1,0 +1,70 @@
+*,
+body {
+    font-size: 100%;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+main{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+    .accountsContainer{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: 2rem;
+        #accountForm{
+            // display: flex;
+        }
+
+
+    }
+    .summaryAccounts{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .transactionsContainer{
+        margin-bottom: 2rem;
+        #transactionsForm{
+            .typeTransactions{
+                display: flex;
+                fieldset{
+                    border: 0;
+                }
+            }
+            .settingsTransactions{
+                display: flex;
+                flex-direction: column;
+                row-gap: 1rem;
+
+                .settingAccount{
+                    .fromTo{
+                        display: none;
+                    }
+                }
+                .settingCategory{
+                    display: flex;
+                    .newCategoryContainer{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

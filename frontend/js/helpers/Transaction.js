@@ -25,12 +25,28 @@ $(() => {
             url: "http://localhost:3000/categories",
         }).done((categories) => {
             $.each(categories, (index, value) => {
-                $("#selectionCategory").append(
-                    `<option value="${value.name}">${value.name}</option>`
-                )
+
+                let loadedCategories = $("#selectionCategory").children();
+                $.each(loadedCategories, (index, loadedCategory) => {
+                    console.log("loadedCategory", loadedCategory.value);
+                    if (loadedCategory.value === value.name) {
+                        console.log("value.name", value.name);
+                        alert("Category already exists!");
+                        return;
+                    } else {
+                        $("#selectionCategory").append(
+                            `<option value="${value.name}">${value.name}</option>`
+                        )
+                    }
+
+                })
             })
             console.log("categories", categories);
 
+            let loadedCategories = $("#selectionCategory").children();
+            $.each(loadedCategories, (index, value) => {
+                console.log("value", value.value);
+            })
         });
     }
 
@@ -95,13 +111,18 @@ $(() => {
     });
 
     $("#newCategoryButton").click(function (event) {
-        let newCategoryName = $("#newCategoryName").val();
-        // console.log("newCategoryButton", newCategoryName);
-        $(".newCategoryContainer").css("display", "none");
-        $("#selectionCategory").val("digo");
-        addCategory("PEDRO");
-        getCategories();
-        alert("New category added!");
+        let inputCategoryName = $("#newCategoryName").val();
+        console.log("newCategoryButton");
+
+        addCategory(inputCategoryName);
+
+
+        // $(".newCategoryContainer").css("display", "none");
+
+
+        // addCategory("PEDRO");
+        // getCategories();
+        // alert("New category added!");
     });
 
 
