@@ -1,76 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>myTrakr</title>
-    <!-- jQuery link -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
-      defer
-    ></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/index.css" />
-  </head>
-  <body>
-    myTrakr
-    <main>
-      <form action="">
-        New Account:
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>myTrakr</title>
+  <!-- jQuery link -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./sass/index.css" />
+</head>
+
+<body>
+  <header>
+    <h1>myTrakr</h1>
+  </header>
+  <main>
+
+    <section class="accountsContainer">
+      <form id="accountForm" action="">
+        <h1>
+          New Account:
+        </h1>
         <input type="text" />
         <button>Add new account</button>
       </form>
-      <form action="">
-        New Transaction: Deposit
-        <input type="radio" />
-        Withdraw
-        <input type="radio" />
-        Transfer
-        <input type="radio" />
-        Account:
-        <select></select>
 
-        From:
-        <select></select>
+    </section>
+    <section class="summaryAccounts">
+      <h1>
+        Account summary
+      </h1>
+      <ul></ul>
+    </section>
+    <section class="transactionsContainer">
+      <form id="transactionsForm" action="">
+        <div class="typeTransactions">
+          New Transaction: Deposit
+          <input type="radio" />
+          Withdraw
+          <input type="radio" />
+          Transfer
+          <input type="radio" />
+        </div>
+        <div class="settingsTransactions">
+          <div class="settingAccount">
+            <div class="accountSelect">
+              Account:
+              <select></select>
+            </div>
+            <div class="fromTo">
+              From:
+              <select></select>
+  
+              To:
+              <select></select>
+            </div>
+          </div>
+          <div class="settingCategory">
+            Category:
+            <select></select>
+            <input type="text" />
+            <button type="button">Add new category</button>
+          </div>
+          <div class="settingAmmount">
+            Description
+            <input type="text" />
 
-        To:
-        <select></select>
-        Category:
-        <select></select>
-        <input type="text" />
-        <button type="button">Add new category</button>
+            Amount:
+            <input type="number" />
+          </div>
 
-        Description
-        <input type="text" />
 
-        Amount:
-        <input type="number" />
-
+        </div>
         <button>Add transaction</button>
       </form>
+    </section>
 
-      Account summary
-      <ul></ul>
+
+
+    <div class="filters">
       Filter by account:
       <select></select>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Username</th>
-          <th>Transaction Type</th>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>From</th>
-          <th>To</th>
-        </tr>
-      </table>
-    </main>
-    <script type="module" src="./js/helpers/Account.js" defer></script>
-    <script type="module" src="./js/helpers/Category.js" defer></script>
-    <script type="module" src="./js/helpers/Common.js" defer></script>
-    <script type="module" src="./js/helpers/Transaction.js" defer></script>
-    <script type="module" src="./js/index.js" defer></script>
-  </body>
+    </div>
+    <table>
+      <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Transaction Type</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>From</th>
+        <th>To</th>
+      </tr>
+    </table>
+  </main>
+  <script type="module" src="./js/helpers/Account.js" defer></script>
+  <script type="module" src="./js/helpers/Category.js" defer></script>
+  <script type="module" src="./js/helpers/Common.js" defer></script>
+  <script type="module" src="./js/helpers/Transaction.js" defer></script>
+  <script type="module" src="./js/index.js" defer></script>
+</body>
+
 </html>
