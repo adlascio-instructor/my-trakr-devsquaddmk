@@ -38,7 +38,7 @@
       <form id="transactionsForm" action="">
         <div class="typeTransactions">
           <h2>New Transaction</h2>
-          <fieldset>
+          <fieldset class="transactionsFieldset">
             <input id="depositTransaction" class="inputTransaction" type="radio" name="transactionType" value="deposit" checked/>
             Deposit
             <input id="withdrawTransaction" class="inputTransaction" type="radio" name="transactionType" value="withdraw" />
@@ -58,12 +58,12 @@
             </div>
             <div class="fromTo">
               From:
-              <select class="fromToSelections" required>
+              <select class="fromToSelections" id="inputFromSelect" required>
                 <option value="">Select an account</option>
               </select>
   
               To:
-              <select class="fromToSelections" required>
+              <select class="fromToSelections" id="inputToSelect" required>
                 <option value="">Select an account</option>
               </select>
             </div>
@@ -73,8 +73,6 @@
               Category:
             </h2> 
             <select id="selectionCategory" required>
-              <option value="" selected disabled>Select a category</option>
-              <option value="newCategory">+ New Category</option>
             </select>
             <div class="newCategoryContainer">
               <input id="newCategoryName" type="text" />
@@ -83,15 +81,15 @@
           </div>
           <div class="settingAmmount">
             Description
-            <input type="text" />
+            <input id="transactionInputDescription" type="text" />
 
             Amount:
-            <input type="number" required/>
+            <input id="transactionInputAmount" type="number" min="1" required/>
           </div>
 
 
         </div>
-        <input type="submit" id="addTransactioninput" value="Add transaction"></input>
+        <input type="submit" id="addTransactionInput" value="Add transaction"></input>
       </form>
     </section>
 

@@ -10,10 +10,10 @@ $(() => {
             $.each(data, (index, value) => {
 
                 $("#selectionAccounts").append(
-                    `<option value="${value.username}">${value.username}</option>`
+                    `<option id="${value.id}" value="${value.username}">${value.username}</option>`
                 )
                 $(".fromToSelections").append(
-                    `<option value="${value.username}">${value.username}</option>`
+                    `<option id="${value.id}" value="${value.username}">${value.username}</option>`
                 )
             });
         });
@@ -24,29 +24,17 @@ $(() => {
             method: "get",
             url: "http://localhost:3000/categories",
         }).done((categories) => {
+            $("#selectionCategory").empty();
+            $("#selectionCategory").append(
+                `<option value="" selected disabled>Select a category</option>
+                    <option value="newCategory">+ New Category</option>`
+            );
             $.each(categories, (index, value) => {
+                $("#selectionCategory").append(
+                    `<option id="${value.id}" value="${value.name}">${value.name}</option>`
+                )
+            });
 
-                let loadedCategories = $("#selectionCategory").children();
-                $.each(loadedCategories, (index, loadedCategory) => {
-                    console.log("loadedCategory", loadedCategory.value);
-                    if (loadedCategory.value === value.name) {
-                        console.log("value.name", value.name);
-                        alert("Category already exists!");
-                        return;
-                    } else {
-                        $("#selectionCategory").append(
-                            `<option value="${value.name}">${value.name}</option>`
-                        )
-                    }
-
-                })
-            })
-            console.log("categories", categories);
-
-            let loadedCategories = $("#selectionCategory").children();
-            $.each(loadedCategories, (index, value) => {
-                console.log("value", value.value);
-            })
         });
     }
 
@@ -62,10 +50,165 @@ $(() => {
         });
     }
 
+    const getTransactions = () => {
+        let transactions = [];
+        $.ajax({
+            method: "get",
+            url: "http://localhost:3000/transactions",
+        }).done((data) => {
+            $.each(data, (index, value) => {
+                transactions.push(value);
+            });
+        });
+        return transactions;
+    }
+
+    const addTransaction = (transaction) => {
+        let inputTransaction = {
+            accountId: 0,
+            accountIdFrom: "null",
+            accountIdTo: "null",
+            type: "",
+            amount: 0,
+            categoryId: 0,
+            description: ""
+        };
+
+        let inputTypeTransaction = $(".transactionsFieldset").children();
+
+
+        inputTypeTransaction.each(function (index, fieldset) {
+            if (fieldset.value === "deposit" || fieldset.value === "withdraw" && fieldset.checked) {
+                inputTransaction.accountId = parseInt($("#selectionAccounts").children(":selected").attr("id"));
+                inputTransaction.type = fieldset.value;
+                inputTransaction.amount = parseFloat($("#transactionInputAmount").val());
+                inputTransaction.categoryId = parseInt($("#selectionCategory").children(":selected").attr("id"));
+                inputTransaction.description = $("#transactionInputDescription").val();
+            }
+            else if (fieldset.value === "transfer" && fieldset.checked) {
+                inputTransaction.accountId = "null"
+                inputTransaction.type = fieldset.value;
+                inputTransaction.amount = parseFloat($("#transactionInputAmount").val());
+                inputTransaction.categoryId = parseInt($("#selectionCategory").children(":selected").attr("id"));
+                inputTransaction.description = $("#transactionInputDescription").val();
+                inputTransaction.accountIdFrom = parseInt($("#inputFromSelect").children(":selected").attr("id"));
+                inputTransaction.accountIdTo = parseInt($("#inputToSelect").children(":selected").attr("id"));
+
+            }
+        })
+        // for (const key in inputTransaction) {
+        //     console.log(key, inputTransaction[key]);
+        // }
+
+        if (inputTransaction.type === "transfer") {
+            console.log(inputTransaction.categoryId);
+            if (inputTransaction.accountIdFrom === inputTransaction.accountIdTo) {
+                alert("You can't transfer money to the same account!");
+                return;
+            }
+            if (!inputTransaction.accountIdFrom || !inputTransaction.accountIdTo) {
+                alert("Please select a from and to account!");
+                return;
+            }
+            if (!inputTransaction.categoryId) {
+                alert("Please select a category!");
+                return;
+            }
+            if (!inputTransaction.amount || inputTransaction.amount < 0) {
+                alert("Please enter an amount!");
+                return;
+            }
+        }
+
+        if (inputTransaction.type === "deposit" || inputTransaction.type === "withdraw") {
+            if (!inputTransaction.accountId) {
+                alert("Please select an account!");
+                return;
+            }
+            if (!inputTransaction.categoryId) {
+                alert("Please select a category!");
+                return;
+            }
+            if (!inputTransaction.amount || inputTransaction.amount < 0) {
+                alert("Please enter an amount!");
+                return;
+            }
+        }
+
+
+        console.log("Ready for POST: ");
+        console.log(typeof inputTransaction);
+
+
+
+
+
+
+
+    }
+
+
+    $.ajax({
+        method: "post",
+        url: "http://localhost:3000/transactions",
+        data: {
+            newTransaction: {
+                accountId: 1,
+                accountIdFrom: "null",
+                accountIdTo: "null",
+                type: "deposit",
+                amount: 1233,
+                categoryId: 1,
+                description: "Description"
+            }
+        }
+    }).done((data) => {
+        console.log("data", data);
+    })
+
+
+
+
+
+    const getIdSelectedAccount = (element) => {
+        let selectedId = 0;
+        let accountSelections = $(element)
+        accountSelections.on("change", function () {
+            let value = $(this).children(":selected").attr("id");
+            selectedId = value;
+            console.log("selectedId", selectedId);
+            return selectedId;
+        });
+    }
+
+
+
+    $("#transactionInputAmount").on("change", function () {
+        let inputAmmount = $(this).val();
+        console.log("inputAmmount", inputAmmount);
+    });
+
+    $("#transactionInputDescription").on("change", function () {
+        let inputDescription = $(this).val();
+        console.log("inputDescription", inputDescription);
+    })
+
+
+
+
 
 
     getAccounts();
     getCategories();
+    getTransactions();
+    getIdSelectedAccount("#selectionAccounts");
+    getIdSelectedAccount("#inputFromSelect");
+    getIdSelectedAccount("#inputToSelect");
+
+
+
+
+
 
 
 
@@ -80,12 +223,12 @@ $(() => {
             } else {
                 $(".fromTo").css("display", "flex");
                 $(".accountSelect").css("display", "none");
-                // console.log("transferTransaction");
             }
         }
     });
 
     $(".inputTransaction").click(() => {
+        console.log("inputs", $("inputTransaction").children());
         if ($(".inputTransaction").is(":checked")) {
             if ($(".accountSelect").css("display") == "flex") {
                 return;
@@ -108,24 +251,34 @@ $(() => {
     $("#addTransactionInput").click(function (event) {
         event.preventDefault();
         console.log("addTransactionButton");
+        addTransaction();
     });
 
     $("#newCategoryButton").click(function (event) {
         let inputCategoryName = $("#newCategoryName").val();
         console.log("newCategoryButton");
+        console.log("inputCategoryName", inputCategoryName);
+        if (inputCategoryName === "") {
+            alert("Please enter a category name!");
+            return;
+        } else {
+            let loadedCategories = $("#selectionCategory").children();
+            let exists = false;
+            loadedCategories.each((index, loadedCategory) => {
+                if (inputCategoryName.toLowerCase().trim() === loadedCategory.value.toLowerCase().trim()) {
+                    exists = true;
+                }
+            })
 
-        addCategory(inputCategoryName);
+            if (exists) {
+                alert("Category already exists!");
+                return;
+            } else {
 
-
-        // $(".newCategoryContainer").css("display", "none");
-
-
-        // addCategory("PEDRO");
-        // getCategories();
-        // alert("New category added!");
+                addCategory(inputCategoryName);
+                getCategories();
+                $(".newCategoryContainer").css("display", "none");
+            }
+        }
     });
-
-
-
-
 });
