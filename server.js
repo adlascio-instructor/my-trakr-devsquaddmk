@@ -46,11 +46,12 @@ app.get("/transactions", (req, res) => {
 app.post("/transactions", (req, res) => {
   const { newTransaction } = req.body;
 
-  const validated = validateTransaction(newTransaction);
+  const parsedTransaction = JSON.parse(newTransaction);
+  const validated = validateTransaction(parsedTransaction);
   if (validated !== "validated") {
     res.status(400).send(validated);
   } else {
-    const newTransactions = addTransaction(newTransaction);
+    const newTransactions = addTransaction(parsedTransaction);
     res.status(201).json(newTransactions);
     // console.log('new transaction', newTransaction);
   }
