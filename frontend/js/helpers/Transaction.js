@@ -137,7 +137,7 @@ $(() => {
 
 
         console.log("Ready for POST: ");
-        console.log(typeof inputTransaction);
+        console.log(inputTransaction);
 
         $.ajax({
             method: "post",
@@ -168,26 +168,7 @@ $(() => {
 
 
 
-    // $.post(
-    //     "http://localhost:3000/transactions",
-    //     {
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "json",
-    //         data: JSON.stringify({
-    //             newTransaction: {
-    //                 accountId: 1,
-    //                 accountIdFrom: null,
-    //                 accountIdTo: null,
-    //                 type: "deposit",
-    //                 amount: 1233,
-    //                 categoryId: 1,
-    //                 description: "Description"
-    //             }
-    //         })
-    //     }
-    // ).done((data) => {
-    //     console.log("data", data);
-    // })
+
 
     // $.ajax({
     //     method: "post",
@@ -200,25 +181,6 @@ $(() => {
     //     console.log("data", data);
     // })
 
-    // $.ajax({
-    //     method: "post",
-    //     data: {
-    //         newTransaction: JSON.stringify({
-    //             accountId: 1,
-    //             accountIdFrom: null,
-    //             accountIdTo: null,
-    //             type: "deposit",
-    //             amount: 1233,
-    //             categoryId: 1,
-    //             description: "Description"
-    //         })
-    //     }
-    //     ,
-    //     url: "http://localhost:3000/transactions",
-    //     dataType: "json",
-    // }).done((data) => {
-    //     console.log("data", data);
-    // })
 
 
 
