@@ -30,17 +30,9 @@
 
 # Create new transaction
 
-# POST http://localhost:3000/transactions
+#POST http://localhost:3000/transactions
 # content-type: application/json
 
 # {
-#   "newTransaction":{
-#     "accountId":null, 
-#     "accountIdFrom":1, 
-#     "accountIdTo":2,
-#     "type":"Transfer", 
-#     "amount":100, 
-#     "categoryId":1,
-#     "description":"salary april"
-#   }
+#   "newTransaction":"{\"accountId\":null,\"accountIdFrom\":1,\"accountIdTo\":2,\"type\":\"Transfer\",\"amount\":100,\"categoryId\":1,\"description\":\"salary april\"}"
 # }

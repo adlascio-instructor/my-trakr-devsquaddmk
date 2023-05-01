@@ -45,6 +45,7 @@ app.get("/transactions", (req, res) => {
 // add new transaction
 app.post("/transactions", (req, res) => {
   const { newTransaction } = req.body;
+
   const parsedTransaction = JSON.parse(newTransaction);
   const validated = validateTransaction(parsedTransaction);
   if (validated !== "validated") {
