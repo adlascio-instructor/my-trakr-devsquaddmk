@@ -26,7 +26,7 @@ app.get("/accounts", (req, res) => {
 
 // add new account
 app.post("/accounts", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { newAccount } = req.body;
   if (!newAccount) {
     res.status(400).send("Invalid data");
@@ -46,11 +46,12 @@ app.get("/transactions", (req, res) => {
 app.post("/transactions", (req, res) => {
   const { newTransaction } = req.body;
 
-  const validated = validateTransaction(newTransaction);
+  const parsedTransaction = JSON.parse(newTransaction);
+  const validated = validateTransaction(parsedTransaction);
   if (validated !== "validated") {
     res.status(400).send(validated);
   } else {
-    const newTransactions = addTransaction(newTransaction);
+    const newTransactions = addTransaction(parsedTransaction);
     res.status(201).json(newTransactions);
     // console.log('new transaction', newTransaction);
   }
@@ -68,7 +69,7 @@ app.post("/categories", (req, res) => {
     res.status(400).send("Invalid data");
   } else {
     const newCategory = addCategory(req.body.newCategory);
-    console.log("body", req.body);
+    // console.log("body", req.body);
     res.status(201).json(newCategory);
   }
 });

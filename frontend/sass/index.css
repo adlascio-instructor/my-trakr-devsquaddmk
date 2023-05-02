@@ -47,6 +47,9 @@ main .transactionsContainer #transactionsForm .settingsTransactions {
   flex-direction: column;
   row-gap: 1rem;
 }
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .accountSelect {
+  display: flex;
+}
 main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo {
   display: none;
 }
