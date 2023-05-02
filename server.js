@@ -26,7 +26,7 @@ app.get("/accounts", (req, res) => {
 
 // add new account
 app.post("/accounts", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { newAccount } = req.body;
   if (!newAccount) {
     res.status(400).send("Invalid data");
@@ -69,7 +69,7 @@ app.post("/categories", (req, res) => {
     res.status(400).send("Invalid data");
   } else {
     const newCategory = addCategory(req.body.newCategory);
-    console.log("body", req.body);
+    // console.log("body", req.body);
     res.status(201).json(newCategory);
   }
 });
