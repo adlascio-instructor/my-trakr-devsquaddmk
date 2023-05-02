@@ -1,7 +1,7 @@
 *,
 body {
     font-size: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -14,53 +14,47 @@ body {
     margin-top: 2rem;
 }
 
-main{
+main {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     width: 100%;
 
-
-    .accountsContainer{
+    .accountsContainer {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: flex-end;
         margin-bottom: 2rem;
-        #accountForm{
-            // display: flex;
-        }
-
-
     }
-    .summaryAccounts{
+    .summaryAccounts {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
     }
-    .transactionsContainer{
+    .transactionsContainer {
         margin-bottom: 2rem;
-        #transactionsForm{
-            .typeTransactions{
+        #transactionsForm {
+            .typeTransactions {
                 display: flex;
-                fieldset{
+                fieldset {
                     border: 0;
                 }
             }
-            .settingsTransactions{
+            .settingsTransactions {
                 display: flex;
                 flex-direction: column;
                 row-gap: 1rem;
 
-                .settingAccount{
-                    .fromTo{
+                .settingAccount {
+                    .fromTo {
                         display: none;
                     }
                 }
-                .settingCategory{
+                .settingCategory {
                     display: flex;
-                    .newCategoryContainer{
+                    .newCategoryContainer {
                         display: none;
                     }
                 }

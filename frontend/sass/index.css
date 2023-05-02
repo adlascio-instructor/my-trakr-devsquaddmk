@@ -1,72 +1,58 @@
 *,
 body {
-    font-size: 100%;
-    font-family: "Roboto", sans-serif;
-    margin: 0;
-    padding: 0;
+  font-size: 100%;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 main {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 main .accountsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
 }
 main .summaryAccounts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }
 main .transactionsContainer {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 main .transactionsContainer #transactionsForm .typeTransactions {
-    display: flex;
+  display: flex;
 }
 main .transactionsContainer #transactionsForm .typeTransactions fieldset {
-    border: 0;
+  border: 0;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 }
-main
-    .transactionsContainer
-    #transactionsForm
-    .settingsTransactions
-    .settingAccount
-    .fromTo {
-    display: none;
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo {
+  display: none;
 }
-main
-    .transactionsContainer
-    #transactionsForm
-    .settingsTransactions
-    .settingCategory {
-    display: flex;
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory {
+  display: flex;
 }
-main
-    .transactionsContainer
-    #transactionsForm
-    .settingsTransactions
-    .settingCategory
-    .newCategoryContainer {
-    display: none;
-} /*# sourceMappingURL=index.css.map */
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer {
+  display: none;
+}/*# sourceMappingURL=index.css.map */
