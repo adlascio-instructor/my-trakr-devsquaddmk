@@ -4,7 +4,8 @@ import {
 } from "./helpers/Transaction.js";
 import {
   addCategory,
-  getCategories
+  getCategories,
+  getNameCategory
 } from "./helpers/Category.js";
 import {
   getIdSelectedAccount,
@@ -87,6 +88,7 @@ $(() => {
   getIdSelectedAccount("#selectionAccounts");
   getIdSelectedAccount("#inputFromSelect");
   getIdSelectedAccount("#inputToSelect");
+  console.log("test", getNameCategory(2));
 
 
 });

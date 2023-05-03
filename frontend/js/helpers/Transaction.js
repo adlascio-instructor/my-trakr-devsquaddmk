@@ -93,6 +93,7 @@ export const addTransaction = (transaction) => {
         url: "http://localhost:3000/transactions",
         dataType: "json",
     }).done((data) => {
+        console.log("data", data);
         alert("Transaction added!");
     })
 

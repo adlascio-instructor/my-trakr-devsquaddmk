@@ -1,4 +1,7 @@
+let nameCategoriesObject = [];
+
 export const getCategories = () => {
+
     $.ajax({
         method: "get",
         url: "http://localhost:3000/categories",
@@ -12,10 +15,34 @@ export const getCategories = () => {
             $("#selectionCategory").append(
                 `<option id="${value.id}" value="${value.name}">${value.name}</option>`
             )
+            if (nameCategoriesObject.find(element => element.id === value.id)) {
+                return;
+            } else {
+                nameCategoriesObject.push({
+                    id: value.id,
+                    "category": value.name
+                });
+            }
         });
-
     });
+
+
+
 }
+
+
+export const getNameCategory = (id) => {
+    let name = "";
+    $.each(nameCategoriesObject, (index, value) => {
+        if (id === value.id) {
+            name = value.category;
+        }
+    })
+    return name;
+};
+
+
+
 
 export const addCategory = (category) => {
     $.ajax({
