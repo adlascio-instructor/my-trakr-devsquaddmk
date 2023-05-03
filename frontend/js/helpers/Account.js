@@ -19,16 +19,18 @@
 
 
     $("#accountForm").submit(event => {
+        
         console.log("submit");
+        const inputAccount = $(".inputAccount").val();
         $.ajax({
             method: "post",
             data: {
-              newAccount: "teste",
+              newAccount: inputAccount,
                 },
             url: "http://localhost:3000/accounts",
             dataType: "json",
         }).done((data) => {
-            console.log("data", data);
+            console.log("accounnt data", data);
         })
     })
         
