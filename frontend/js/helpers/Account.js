@@ -1,5 +1,5 @@
 
-    
+
    $(document).ready(() => {
 
     //Getting the Accounts from the server and showing them on the Accounts Summary
@@ -13,11 +13,12 @@
 
             $(".summaryAccounts").children("ul").append(`
             <li>
-              <h3>${account.username}</h3>
+              <h3 class="account">${account.username}</h3>
               <h3 class="balance"></h3>
             </li>`);
         })
     });
+
 
 
     //Posting the new Accounts on the server
@@ -36,7 +37,8 @@
             console.log("account data", data);
         })
     })
-        
+
+
     })
 
  
