@@ -17,7 +17,13 @@
         })
     });
 
-    
+    $("#accountForm").submit(event => {
+        event.preventDefault();
+        console.log("submit");
+        const accountTest = $(event.target).children('input').val();
+        console.log('account', accountTest);
+        $(event.target).siblings("")
+    })
  });
  }
 
