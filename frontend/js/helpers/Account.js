@@ -1,6 +1,6 @@
- function getAccounts() { 
+
     
-    $(document).ready(() => {
+   $(document).ready(() => {
 
     $.ajax({
         method: "get",
@@ -17,17 +17,27 @@
         })
     });
 
-    $("#accountForm").submit(event => {
-        event.preventDefault();
-        console.log("submit");
-        const accountTest = $(event.target).children('input').val();
-        console.log('account', accountTest);
-        $(event.target).siblings("")
-    })
- });
- }
 
- getAccounts();
+    $("#accountForm").submit(event => {
+        console.log("submit");
+        $.ajax({
+            method: "post",
+            data: {
+              newAccount: "teste",
+                },
+            url: "http://localhost:3000/accounts",
+            dataType: "json",
+        }).done((data) => {
+            console.log("data", data);
+        })
+    })
+        
+    })
+
+ 
+ 
+ 
+
 
 
 
