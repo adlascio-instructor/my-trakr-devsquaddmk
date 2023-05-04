@@ -2,27 +2,34 @@ import { addTransaction, getTransactions } from "./helpers/Transaction.js";
 import {
     addCategory,
     getCategories,
-    getNameCategory,
+    renderCategory
 } from "./helpers/Category.js";
 
-import { getIdSelectedAccount, getAccounts } from "./helpers/Common.js";
-
 import {
-  getIdSelectedAccount,
-  getAccountsOptions
+    getIdSelectedAccount,
+    getAccountsOptions
 } from "./helpers/Common.js";
 
-$(() => {
-  $("#transactionInputAmount").on("change", function () {
-    let inputAmmount = $(this).val();
-  });
 
-  $("#transactionInputDescription").on("change", function () {
-    let inputDescription = $(this).val();
-  })
 
 
 $(async () => {
+
+
+    getAccountsOptions();
+    const categories = await getCategories();
+    console.log("categories", categories);
+
+
+    let accounts = [{ name: "Diogo" }]
+    // getTransactions(accounts, categories);
+    getIdSelectedAccount("#selectionAccounts");
+    getIdSelectedAccount("#inputFromSelect");
+    getIdSelectedAccount("#inputToSelect");
+
+
+
+
     $("#transactionInputAmount").on("change", function () {
         let inputAmmount = $(this).val();
     });
@@ -66,18 +73,17 @@ $(async () => {
     $("#addTransactionInput").click(function (event) {
         event.preventDefault();
         addTransaction();
+        console.log("categoriesBeforeCalling", categories);
+        getTransactions(accounts, categories);
+
+
+
     });
 
-  getAccountsOptions();
-  getCategories();
-  getTransactions();
-  getIdSelectedAccount("#selectionAccounts");
-  getIdSelectedAccount("#inputFromSelect");
-  getIdSelectedAccount("#inputToSelect");
-  console.log("test", getNameCategory(2));
 
 
-    $("#newCategoryButton").click(function (event) {
+
+    $("#newCategoryButton").click(async function (event) {
         let inputCategoryName = $("#newCategoryName").val();
         if (inputCategoryName === "") {
             alert("Please enter a category name!");
@@ -97,18 +103,13 @@ $(async () => {
                 alert("Category already exists!");
                 return;
             } else {
-                addCategory(inputCategoryName);
-                getCategories();
+                let newCategory = await addCategory(inputCategoryName);
+                categories.push(newCategory);
+                renderCategory(newCategory);
                 $(".newCategoryContainer").css("display", "none");
             }
         }
     });
 
-    getAccounts();
-    const categories = await getCategories();
-    console.log("categories", categories);
-    getTransactions(accounts, categories);
-    getIdSelectedAccount("#selectionAccounts");
-    getIdSelectedAccount("#inputFromSelect");
-    getIdSelectedAccount("#inputToSelect");
+
 });
