@@ -1,18 +1,4 @@
-export const getTransactions = (accounts, categories) => {
-    // console.log("accounts", accounts);
-    console.log("categories inside RENDER METHOD TRANSACTION", categories);
-    // let transactions = [];
-    // $.ajax({
-    //     method: "get",
-    //     url: "http://localhost:3000/transactions",
-    // }).done((data) => {
-    //     $.each(data, (index, value) => {
-    //         transactions.push(value);
-    //     });
-    // });
-    // return transactions;
-    // console.log("transactionsMethod");
-};
+export const getTransactions = (accounts, categories) => { };
 
 export const addTransaction = () => {
     let inputTransaction = {

@@ -2,7 +2,8 @@ import { addTransaction, getTransactions } from "./helpers/Transaction.js";
 import {
     addCategory,
     getCategories,
-    renderCategory
+    renderCategory,
+    renderSavedCategories
 } from "./helpers/Category.js";
 
 import {
@@ -26,6 +27,10 @@ $(async () => {
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
+
+    renderSavedCategories(categories);
+
+
 
 
 
