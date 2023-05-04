@@ -45,7 +45,6 @@
 
 
     //Getting the Accounts by ID
-    let nameAccountsArray = [];
 
     const getAccountsById = () => {
 
