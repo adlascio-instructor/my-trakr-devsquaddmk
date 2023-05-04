@@ -1,46 +1,97 @@
-import { getNameCategory } from "./Category.js";
+$(document).ready(() => {
 
-
-$.ajax({
-    type: "get",
-    url: "http://localhost:3000/accounts",
-    dataType: "json",
-}).done((data) => {
-    console.log("data", data);
-    $.each(data, function (indexInArray, accounts) {
-        console.log("Accounts", accounts);
-        $.each(
-            accounts.transactions,
-            function (indexInArray, transactions) {
-                console.log("Transactions", transactions);
-                if (transactions.type === "transfer") {
-                    $("#transInformation").append(`<tr>
-                        <td>${transactions.id}</td>
-                        <td>${accounts.username}</td>
-                        <td>${transactions.type}</td>
-                        <td>"Category"</td>
-                        <td>${transactions.description}</td>
-                        <td>${transactions.amount}</td>
-                        <td>${transactions.accountIdFrom}</td>
-                        <td>${transactions.accountIdTo}</td
-                        </tr>`);
-                } else {
-                    $("#transInformation").append(`<tr>
-                        <td>${transactions.id}</td>
-                        <td>${accounts.username}</td>
-                        <td>${transactions.type}</td>
-                        <td>"Category"</td>
-                        <td>${transactions.description}</td>
-                        <td>${transactions.amount}</td>
-                        <td>N/A</td>
-                        <td>N/A</td
-                        </tr>`);
-                }
-            }
-        );
+    const getAccounts = () => {
+    //Getting the Accounts from the server and showing them on the Accounts Summary
+    $.ajax({
+        method: "get",
+        url: "http://localhost:3000/accounts",
+    }).done((accounts) => {
+        $.each(accounts, (index, account) => {
+            renderAccounts(account)
+            
+        })
     });
+    }
 
-    let test = getNameCategory(1);
-    console.log("testCategoryByID", test);
-});
 
+    //---------------------------------------------
+    //Posting the new Accounts on the server
+
+    const addNewAccount = () => {
+    $("#accountForm").submit(event => {
+        
+        const inputAccount = $(".inputAccount").val();
+        
+        return $.ajax({
+            method: "post",
+            data: {
+              newAccount: inputAccount,
+                },
+            url: "http://localhost:3000/accounts",
+            dataType: "json",
+        }).done((account) => {
+            renderAccounts(account);
+            const savedAccounts = [];
+            savedAccounts.push({
+            id: account.id,
+            name: account.username,
+            balance: 0
+        })
+        return savedAccounts;
+
+        })
+    })
+    }
+
+    const renderAccounts = (account) => {
+        $(".summaryAccounts").children("ul").append(`
+        <li class="account">
+          <h3 class="account-name">${account.username}</h3>
+          <h3 class="balance">0</h3>
+        </li>`)
+    }
+    //-----------------------------------------------
+
+
+    //Getting the Accounts by ID
+
+   const getAccountsById = () => {
+
+    $.ajax({
+        method: "get",
+        url: "http://localhost:3000/accounts",
+    }).done((accounts) => {
+    const savedAccounts = [];
+    $each(accounts, (index, account) => {
+        savedAccounts.push({
+            id: account.id,
+            name: account.username,
+            balance: 0
+        });
+    })
+})
+}
+//-----------------------------------------------------
+
+const getNameAccount = (id, accounts) => {
+    let name = "";
+    $.each(accounts, (index, value) => {
+        if (id === value.id) {
+            name = value.username
+        }
+    })
+    return name;
+
+}
+
+//-----------------------------------------------------
+
+    getAccounts();
+    addNewAccount();
+    getAccountsById();
+    getNameAccount();
+    addAccountObj();
+
+    })
+
+    
