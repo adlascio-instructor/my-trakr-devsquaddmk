@@ -1,3 +1,5 @@
+import { getNameCategory } from "./Category.js";
+
 $(document).ready(() => {
     $.ajax({
         type: "get",
@@ -37,5 +39,8 @@ $(document).ready(() => {
                 }
             );
         });
+
+        let test = getNameCategory(1);
+        console.log("testCategoryByID", test);
     });
 });
