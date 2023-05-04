@@ -2,6 +2,7 @@
 
    $(document).ready(() => {
 
+    const getAccounts = () => {
     //Getting the Accounts from the server and showing them on the Accounts Summary
     $.ajax({
         method: "get",
@@ -12,19 +13,21 @@
             //console.log("account", account);
 
             $(".summaryAccounts").children("ul").append(`
-            <li>
-              <h3 class="account">${account.username}</h3>
+            <li class="account">
+              <h3 class="account-name">${account.username}</h3>
               <h3 class="balance"></h3>
             </li>`);
         })
     });
+}
 
 
-
+    //---------------------------------------------
     //Posting the new Accounts on the server
+
+
     $("#accountForm").submit(event => {
         
-        //console.log("submit");
         const inputAccount = $(".inputAccount").val();
         $.ajax({
             method: "post",
@@ -37,9 +40,55 @@
             console.log("account data", data);
         })
     })
+    //-----------------------------------------------
 
 
+    let nameAccountsArray = [];
+
+    const getAccountsById = () => {
+
+        $.ajax({
+            method: "get",
+        url: "http://localhost:3000/accounts",
+    }).done((accounts) => {
+        $.each(accounts, (index, account)=> {
+            $(".account").append(
+                `<option id="${account.id}" value="${account.username}"></option>`
+            );
+            if (nameAccountsArray.find(element => element.id === account.id)) {
+                return;
+            } else {
+                nameAccountsArray.push({
+                    id: account.id,
+                    name: account.username,
+                    balance: 0
+                })
+        
+            }
+            
+        })
+
+    
     })
+    }
+    //-----------------------------------------------------
+
+    const getNameAccount = (id) => {
+        let name = "";
+        $.each(nameAccountsArray, (index, value) => {
+            if (id === value.id) {
+                name = value.username
+            }
+        })
+        return name;
+    }
+
+    getAccounts();
+    getAccountsById();
+    getNameAccount();
+    })
+
+    
 
  
  
