@@ -9,7 +9,7 @@ export const getIdSelectedAccount = (element) => {
 }
 
 
-export const getAccounts = () => {
+export const getAccountsOptions = () => {
     $.ajax({
         method: "get",
         url: "http://localhost:3000/accounts",

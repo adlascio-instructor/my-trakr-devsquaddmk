@@ -9,7 +9,7 @@ import {
 } from "./helpers/Category.js";
 import {
   getIdSelectedAccount,
-  getAccounts
+  getAccountsOptions
 } from "./helpers/Common.js";
 
 $(() => {
@@ -82,7 +82,7 @@ $(() => {
   });
 
 
-  getAccounts();
+  getAccountsOptions();
   getCategories();
   getTransactions();
   getIdSelectedAccount("#selectionAccounts");
