@@ -2,33 +2,75 @@ import { addTransaction, getTransactions } from "./helpers/Transaction.js";
 import {
     addCategory,
     getCategories,
-    renderCategory
+    renderCategory,
 } from "./helpers/Category.js";
 
-import {
-    getIdSelectedAccount,
-    getAccountsOptions
-} from "./helpers/Common.js";
-
-
-
+import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
 
 $(async () => {
-
-
     getAccountsOptions();
-    const categories = await getCategories();
-    console.log("categories", categories);
+    // const categories = await getCategories();
 
+    const categories = [
+        {
+            id: 1,
+            name: "re",
+        },
+        {
+            id: 2,
+            name: "ret",
+        },
+    ];
+    console.log(" categories", categories);
 
-    let accounts = [{ name: "Diogo" }]
+    let accounts = [
+        {
+            id: 1,
+            username: "Arthur",
+            transactions: [
+                {
+                    accountId: 1,
+                    accountIdFrom: "null",
+                    accountIdTo: "null",
+                    type: "deposit",
+                    amount: 8890,
+                    categoryId: 1,
+                    description: "May",
+                    id: 1,
+                },
+                {
+                    accountId: 1,
+                    accountIdFrom: "null",
+                    accountIdTo: "null",
+                    type: "deposit",
+                    amount: 678,
+                    categoryId: 1,
+                    description: "June",
+                    id: 2,
+                },
+            ],
+        },
+        {
+            username: "Zoey",
+            id: 2,
+            transactions: [
+                {
+                    accountId: 2,
+                    accountIdFrom: "null",
+                    accountIdTo: "null",
+                    type: "deposit",
+                    amount: 732,
+                    categoryId: 2,
+                    description: "44",
+                    id: 3,
+                },
+            ],
+        },
+    ];
     // getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
-
-
-
 
     $("#transactionInputAmount").on("change", function () {
         let inputAmmount = $(this).val();
@@ -69,19 +111,12 @@ $(async () => {
         }
     });
 
-
     $("#addTransactionInput").click(function (event) {
-        event.preventDefault();
-        addTransaction();
-        console.log("categoriesBeforeCalling", categories);
+        // event.preventDefault();
+        // addTransaction();
+        // console.log("categoriesBeforeCalling", categories);
         getTransactions(accounts, categories);
-
-
-
     });
-
-
-
 
     $("#newCategoryButton").click(async function (event) {
         let inputCategoryName = $("#newCategoryName").val();
@@ -110,6 +145,4 @@ $(async () => {
             }
         }
     });
-
-
 });

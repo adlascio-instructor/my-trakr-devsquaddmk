@@ -1,17 +1,45 @@
+import { getNameCategory } from "./Category.js";
+
 export const getTransactions = (accounts, categories) => {
-    // console.log("accounts", accounts);
-    console.log("categories inside RENDER METHOD TRANSACTION", categories);
-    // let transactions = [];
-    // $.ajax({
-    //     method: "get",
-    //     url: "http://localhost:3000/transactions",
-    // }).done((data) => {
-    //     $.each(data, (index, value) => {
-    //         transactions.push(value);
-    //     });
-    // });
-    // return transactions;
-    // console.log("transactionsMethod");
+    // console.log("inside");
+    // console.log(accounts);
+    // console.log(categories);
+    $.each(accounts, function (indexInArray, account) {
+        $.each(account.transactions, function (indexInArray, transactions) {
+            // console.log("Transactions", transactions);
+            if (transactions.type === "transfer") {
+                let categoryName = getNameCategory(
+                    transactions.categoryId,
+                    categories
+                );
+                $("#transInformation").append(`<tr>
+                        <td>${transactions.id}</td>
+                        <td>${account.username}</td>
+                        <td>${transactions.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transactions.description}</td>
+                        <td>${transactions.amount}</td>
+                        <td>${transactions.accountIdFrom}</td>
+                        <td>${transactions.accountIdTo}</td
+                        </tr>`);
+            } else {
+                let categoryName = getNameCategory(
+                    transactions.categoryId,
+                    categories
+                );
+                $("#transInformation").append(`<tr>
+                        <td>${transactions.id}</td>
+                        <td>${account.username}</td>
+                        <td>${transactions.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transactions.description}</td>
+                        <td>${transactions.amount}</td>
+                        <td>N/A</td>
+                        <td>N/A</td
+                        </tr>`);
+            }
+        });
+    });
 };
 
 export const addTransaction = () => {
@@ -129,6 +157,4 @@ export const addTransaction = () => {
     }
     $("#selectionCategory").val("default");
     $("#selectionAccounts").val("default");
-
-}
-
+};
