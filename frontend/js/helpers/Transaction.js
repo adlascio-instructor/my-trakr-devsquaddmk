@@ -1,4 +1,6 @@
 export const getTransactions = (accounts, categories) => {
+    // console.log("accounts", accounts);
+    console.log("categories inside RENDER METHOD TRANSACTION", categories);
     // let transactions = [];
     // $.ajax({
     //     method: "get",
@@ -9,9 +11,10 @@ export const getTransactions = (accounts, categories) => {
     //     });
     // });
     // return transactions;
+    // console.log("transactionsMethod");
 };
 
-export const addTransaction = (transaction) => {
+export const addTransaction = () => {
     let inputTransaction = {
         accountId: 0,
         accountIdFrom: "null",

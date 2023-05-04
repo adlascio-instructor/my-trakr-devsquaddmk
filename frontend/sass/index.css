@@ -23,7 +23,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #306BAC;
+  background-color: #306bac;
 }
 header h1 {
   font-size: 2rem;
@@ -183,5 +183,5 @@ main .transactionsContainer #transactionsForm input[type=submit] {
   color: white;
 }
 main .transactionsContainer #transactionsForm input[type=submit]:hover {
-  background-color: #1E4A7E;
+  background-color: #1e4a7e;
 }/*# sourceMappingURL=index.css.map */
