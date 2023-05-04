@@ -105,15 +105,3 @@ export const addTransaction = (transaction) => {
     $("#selectionCategory").val("default");
     $("#selectionAccounts").val("default");
 }
-
-// $.ajax({
-//     method: "post",
-//     data: {
-//         newAccount: "Diogo",
-//     },
-//     url: "http://localhost:3000/accounts",
-//     dataType: "json",
-// }).done((data) => {
-//     console.log("data", data);
-// })
-
