@@ -19,13 +19,13 @@
             </li>`);
         })
     });
-}
+    }
 
 
     //---------------------------------------------
     //Posting the new Accounts on the server
 
-
+    const addNewAccount = () => {
     $("#accountForm").submit(event => {
         
         const inputAccount = $(".inputAccount").val();
@@ -40,9 +40,11 @@
             console.log("account data", data);
         })
     })
+    }
     //-----------------------------------------------
 
 
+    //Getting the Accounts by ID
     let nameAccountsArray = [];
 
     const getAccountsById = () => {
@@ -64,7 +66,7 @@
                     balance: 0
                 })
         
-            }
+            };
             
         })
 
@@ -84,6 +86,7 @@
     }
 
     getAccounts();
+    addNewAccount();
     getAccountsById();
     getNameAccount();
     })
