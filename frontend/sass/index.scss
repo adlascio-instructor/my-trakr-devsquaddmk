@@ -43,11 +43,9 @@ main {
     padding: {
         top: 2.3rem;
         bottom: 2rem;
-        left: 2rem;
-        right: 2rem;
-    }
-
-    ;
+        left: 4rem;
+        right: 4rem;
+    };
 
 
     .accountsContainer {
@@ -64,6 +62,7 @@ main {
             }
 
             input {
+                width: 15rem;
                 padding: 0.3rem;
             }
 

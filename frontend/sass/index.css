@@ -39,8 +39,8 @@ main {
   width: 100%;
   padding-top: 2.3rem;
   padding-bottom: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 main .accountsContainer {
   display: flex;
@@ -54,6 +54,7 @@ main .accountsContainer #accountForm h1 {
   margin-bottom: 0.5rem;
 }
 main .accountsContainer #accountForm input {
+  width: 15rem;
   padding: 0.3rem;
 }
 main .accountsContainer #accountForm button {
