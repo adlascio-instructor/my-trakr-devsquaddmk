@@ -28,7 +28,7 @@ $(async () => {
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
 
-    renderSavedCategories(categories);
+    // renderSavedCategories(categories);
 
 
 
