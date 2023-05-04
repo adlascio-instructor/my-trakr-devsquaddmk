@@ -6,15 +6,9 @@ $(document).ready(() => {
         method: "get",
         url: "http://localhost:3000/accounts",
     }).done((accounts) => {
-        //console.log("accounts", accounts);
         $.each(accounts, (index, account) => {
-            //console.log("account", account);
-
-            $(".summaryAccounts").children("ul").append(`
-            <li class="account">
-              <h3 class="account-name">${account.username}</h3>
-              <h3 class="balance"></h3>
-            </li>`);
+            renderAccounts(account)
+            
         })
     });
     }
@@ -27,17 +21,34 @@ $(document).ready(() => {
     $("#accountForm").submit(event => {
         
         const inputAccount = $(".inputAccount").val();
-        $.ajax({
+        
+        return $.ajax({
             method: "post",
             data: {
               newAccount: inputAccount,
                 },
             url: "http://localhost:3000/accounts",
             dataType: "json",
-        }).done((data) => {
-            console.log("account data", data);
+        }).done((account) => {
+            renderAccounts(account);
+            const savedAccounts = [];
+            savedAccounts.push({
+            id: account.id,
+            name: account.username,
+            balance: 0
+        })
+        return savedAccounts;
+
         })
     })
+    }
+
+    const renderAccounts = (account) => {
+        $(".summaryAccounts").children("ul").append(`
+        <li class="account">
+          <h3 class="account-name">${account.username}</h3>
+          <h3 class="balance">0</h3>
+        </li>`)
     }
     //-----------------------------------------------
 
@@ -48,15 +59,15 @@ $(document).ready(() => {
 
     $.ajax({
         method: "get",
-    url: "http://localhost:3000/accounts",
-}).done((accounts) => {
+        url: "http://localhost:3000/accounts",
+    }).done((accounts) => {
     const savedAccounts = [];
     $each(accounts, (index, account) => {
         savedAccounts.push({
             id: account.id,
             name: account.username,
             balance: 0
-        })
+        });
     })
 })
 }
@@ -64,18 +75,23 @@ $(document).ready(() => {
 
 const getNameAccount = (id, accounts) => {
     let name = "";
-    $.each(nameAccountsArray, (index, value) => {
+    $.each(accounts, (index, value) => {
         if (id === value.id) {
             name = value.username
         }
     })
     return name;
+
 }
+
+//-----------------------------------------------------
 
     getAccounts();
     addNewAccount();
     getAccountsById();
     getNameAccount();
+    addAccountObj();
+
     })
 
     
