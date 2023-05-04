@@ -23,7 +23,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #306BAC;
+  background-color: #306bac;
 }
 header h1 {
   font-size: 2rem;
@@ -39,8 +39,8 @@ main {
   width: 100%;
   padding-top: 2.3rem;
   padding-bottom: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 main .accountsContainer {
   display: flex;
@@ -54,7 +54,8 @@ main .accountsContainer #accountForm h1 {
   margin-bottom: 0.5rem;
 }
 main .accountsContainer #accountForm input {
-  padding: 0.4rem;
+  width: 15rem;
+  padding: 0.3rem;
 }
 main .accountsContainer #accountForm button {
   padding-top: 0.5rem;
@@ -95,7 +96,9 @@ main .transactionsContainer #transactionsForm .typeTransactions input:nth-child(
 main .transactionsContainer #transactionsForm .settingsTransactions {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  margin-top: 1.2rem;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount {
   display: flex;
@@ -111,17 +114,63 @@ main .transactionsContainer #transactionsForm .settingsTransactions .settingAcco
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo {
   display: none;
+  align-items: center;
+  justify-content: center;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo .fromToSelections {
+  padding: 0.3rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo h5:first-child {
+  margin-right: 0.3rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAccount .fromTo h5:last-of-type {
+  margin-left: 0.8rem;
+  margin-right: 0.3rem;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory {
   display: flex;
   align-items: center;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory #selectionCategory {
-  padding: 0.4rem;
+  padding: 0.3rem;
   margin-left: 0.3rem;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer {
   display: none;
+  margin-left: 0.8rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer input {
+  padding: 0.3rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: 0.3rem;
+  background-color: #FD7F20;
+  border: none;
+  border-radius: 0.2rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer button:hover {
+  background-color: #E56E1B;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount {
+  display: flex;
+  align-items: center;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount input {
+  padding: 0.3rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount input:first-child {
+  margin-right: 1.5rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount h5:first-child {
+  margin-right: 0.3rem;
+}
+main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount h5:last-of-type {
+  margin-left: 0.8rem;
+  margin-right: 0.3rem;
 }
 main .transactionsContainer #transactionsForm input[type=submit] {
   padding-top: 0.5rem;
@@ -134,5 +183,5 @@ main .transactionsContainer #transactionsForm input[type=submit] {
   color: white;
 }
 main .transactionsContainer #transactionsForm input[type=submit]:hover {
-  background-color: #1E4A7E;
+  background-color: #1e4a7e;
 }/*# sourceMappingURL=index.css.map */

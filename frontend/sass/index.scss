@@ -1,7 +1,7 @@
 *,
 body {
     font-size: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,7 +23,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #306BAC;
+    background-color: #306bac;
 
     h1 {
         font-size: 2rem;
@@ -31,7 +31,6 @@ header {
         letter-spacing: 0.5rem;
         color: white;
     }
-
 }
 
 main {
@@ -40,14 +39,14 @@ main {
     block-size: block;
     width: 100%;
 
+
     padding: {
         top: 2.3rem;
         bottom: 2rem;
-        left: 2rem;
-        right: 2rem;
-    }
+        left: 4rem;
+        right: 4rem;
+    };
 
-    ;
 
 
     .accountsContainer {
@@ -56,15 +55,16 @@ main {
         align-items: center;
         justify-content: flex-end;
         margin-bottom: 2rem;
-
         #accountForm {
+
             h1 {
                 font-size: 1.2rem;
                 margin-bottom: 0.5rem;
             }
 
             input {
-                padding: 0.4rem;
+                width: 15rem;
+                padding: 0.3rem;
             }
 
             button {
@@ -86,73 +86,139 @@ main {
                 }
             }
 
+
         }
-
-
     }
-
     .summaryAccounts {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
     }
-
     .transactionsContainer {
         margin-bottom: 2rem;
-
         #transactionsForm {
             .typeTransactions {
                 display: flex;
+
+
                 margin-bottom: 1rem;
                 align-items: center;
-                
 
-                h2{
+
+                h2 {
                     margin-right: 1rem;
                 }
 
                 .transactionsFieldset {
-                    border: 0;   
+
+                    border: 0;
                 }
 
-                & input:nth-child(2), & input:nth-child(3) {
+                & input:nth-child(2),
+                & input:nth-child(3) {
                     margin-left: 1rem;
                 }
             }
-
             .settingsTransactions {
                 display: flex;
                 flex-direction: column;
-                row-gap: 1rem;
+                row-gap: 1.2rem;
+                margin-bottom: 1.2rem;
+                margin-top: 1.2rem;
 
                 .settingAccount {
+
                     display: flex;
                     align-items: center;
+
                     .accountSelect {
                         display: flex;
                         align-items: center;
-                        #selectionAccounts{
+
+
+                        #selectionAccounts {
                             margin-left: 0.3rem;
                             padding: 0.3rem;
                         }
                     }
-
                     .fromTo {
                         display: none;
+                        align-items: center;
+                        justify-content: center;
+
+                        .fromToSelections {
+                            padding: 0.3rem;
+
+                        }
+
+                        & h5:first-child{
+                            margin-right: 0.3rem;
+                        }
+
+                        & h5:last-of-type{
+                            margin-left: 0.8rem;
+                            margin-right: 0.3rem;
+                        }
+
+
+
                     }
                 }
-
                 .settingCategory {
                     display: flex;
+
                     align-items: center;
-                    #selectionCategory{
-                        padding: 0.4rem;
+
+                    #selectionCategory {
+                        padding: 0.3rem;
                         margin-left: 0.3rem;
                     }
 
+
                     .newCategoryContainer {
                         display: none;
+                        margin-left: 0.8rem;
+
+                        input {
+                            padding: 0.3rem;
+                        }
+
+                        button {
+                            padding: {
+                                top: 0.5rem;
+                                bottom: 0.5rem;
+                                left: 1rem;
+                                right: 1rem;
+                            }
+
+                            margin-left: 0.3rem;
+                            background-color: #FD7F20;
+                            border: none;
+                            border-radius: 0.2rem;
+
+                            &:hover {
+                                background-color: #E56E1B;
+                            }
+                        }
+                    }
+                }
+
+                .settingAmmount {
+                    display: flex;
+                    align-items: center;
+                    input {
+                        padding: 0.3rem;
+                    }
+                    & input:first-child {
+                        margin-right: 1.5rem;
+                    }
+                    & h5:first-child{
+                        margin-right: 0.3rem;
+                    }
+                    & h5:last-of-type{
+                        margin-left: 0.8rem;
+                        margin-right: 0.3rem;
                     }
                 }
             }
@@ -165,14 +231,13 @@ main {
                     right: 1rem;
                 }
 
-                ;
                 background-color: #295792;
                 border: none;
                 border-radius: 0.2rem;
                 color: white;
 
                 &:hover {
-                    background-color: #1E4A7E;
+                    background-color: #1e4a7e;
                 }
             }
         }

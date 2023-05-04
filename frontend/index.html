@@ -57,12 +57,12 @@
               </select>
             </div>
             <div class="fromTo">
-              From:
+              <h5>From:</h5>
               <select class="fromToSelections" id="inputFromSelect" required>
                 <option value="default">Select an account</option>
               </select>
   
-              To:
+              <h5>To:</h5>
               <select class="fromToSelections" id="inputToSelect" required>
                 <option value="default">Select an account</option>
               </select>
@@ -73,6 +73,8 @@
               Category:
             </h2> 
             <select id="selectionCategory" required>
+              <option value="default" selected disabled>Select a category</option>
+              <option value="newCategory">+ New Category</option>
             </select>
             <div class="newCategoryContainer">
               <input id="newCategoryName" type="text" />
@@ -80,10 +82,10 @@
             </div>
           </div>
           <div class="settingAmmount">
-            Description
+            <h5>Description:</h5>
             <input id="transactionInputDescription" type="text" />
 
-            Amount:
+            <h5>Ammount:</h5>
             <input id="transactionInputAmount" type="number" min="1" required/>
           </div>
 
@@ -100,16 +102,26 @@
       <select></select>
     </div>
     <table>
-      <tr>
-        <th>Id</th>
-        <th>Username</th>
-        <th>Transaction Type</th>
+      <tr id="transInformation">
+        <th>ID</th>
+        <th>User</th>
+        <th>Type</th>
         <th>Category</th>
         <th>Description</th>
         <th>Amount</th>
         <th>From</th>
         <th>To</th>
       </tr>
+      <!-- <tr>
+        <td id="id"></th>
+        <td id="userName"></th>
+        <td id="transactionType"></th>
+        <td id="category"></th>
+        <td id="description"></th>
+        <td id="amount"></th>
+        <td id="from"></th>
+        <td id="to"></th>
+      </tr> -->
     </table>
   </main>
   <script type="module" src="./js/helpers/Account.js" defer></script>

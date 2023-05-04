@@ -1,6 +1,4 @@
-
-
-   $(document).ready(() => {
+$(document).ready(() => {
 
     const getAccounts = () => {
     //Getting the Accounts from the server and showing them on the Accounts Summary
@@ -91,11 +89,3 @@
     })
 
     
-
- 
- 
- 
-
-
-
-
