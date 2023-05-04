@@ -44,43 +44,33 @@ $(document).ready(() => {
 
     //Getting the Accounts by ID
 
-    const getAccountsById = () => {
+   const getAccountsById = () => {
 
-        $.ajax({
-            method: "get",
-        url: "http://localhost:3000/accounts",
-    }).done((accounts) => {
-        $.each(accounts, (index, account)=> {
-            $(".account").append(
-                `<option id="${account.id}" value="${account.username}"></option>`
-            );
-            if (nameAccountsArray.find(element => element.id === account.id)) {
-                return;
-            } else {
-                nameAccountsArray.push({
-                    id: account.id,
-                    name: account.username,
-                    balance: 0
-                })
-        
-            };
-            
+    $.ajax({
+        method: "get",
+    url: "http://localhost:3000/accounts",
+}).done((accounts) => {
+    const savedAccounts = [];
+    $each(accounts, (index, account) => {
+        savedAccounts.push({
+            id: account.id,
+            name: account.username,
+            balance: 0
         })
-
-    
     })
-    }
-    //-----------------------------------------------------
+})
+}
+//-----------------------------------------------------
 
-    const getNameAccount = (id) => {
-        let name = "";
-        $.each(nameAccountsArray, (index, value) => {
-            if (id === value.id) {
-                name = value.username
-            }
-        })
-        return name;
-    }
+const getNameAccount = (id, accounts) => {
+    let name = "";
+    $.each(nameAccountsArray, (index, value) => {
+        if (id === value.id) {
+            name = value.username
+        }
+    })
+    return name;
+}
 
     getAccounts();
     addNewAccount();
