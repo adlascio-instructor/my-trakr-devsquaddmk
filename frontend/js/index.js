@@ -4,7 +4,23 @@ import {
     getCategories,
     getNameCategory,
 } from "./helpers/Category.js";
+
 import { getIdSelectedAccount, getAccounts } from "./helpers/Common.js";
+
+import {
+  getIdSelectedAccount,
+  getAccountsOptions
+} from "./helpers/Common.js";
+
+$(() => {
+  $("#transactionInputAmount").on("change", function () {
+    let inputAmmount = $(this).val();
+  });
+
+  $("#transactionInputDescription").on("change", function () {
+    let inputDescription = $(this).val();
+  })
+
 
 $(async () => {
     $("#transactionInputAmount").on("change", function () {
@@ -46,10 +62,20 @@ $(async () => {
         }
     });
 
+
     $("#addTransactionInput").click(function (event) {
         event.preventDefault();
         addTransaction();
     });
+
+  getAccountsOptions();
+  getCategories();
+  getTransactions();
+  getIdSelectedAccount("#selectionAccounts");
+  getIdSelectedAccount("#inputFromSelect");
+  getIdSelectedAccount("#inputToSelect");
+  console.log("test", getNameCategory(2));
+
 
     $("#newCategoryButton").click(function (event) {
         let inputCategoryName = $("#newCategoryName").val();
