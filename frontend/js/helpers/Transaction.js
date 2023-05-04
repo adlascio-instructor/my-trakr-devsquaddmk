@@ -1,15 +1,15 @@
-export const getTransactions = () => {
-    let transactions = [];
-    $.ajax({
-        method: "get",
-        url: "http://localhost:3000/transactions",
-    }).done((data) => {
-        $.each(data, (index, value) => {
-            transactions.push(value);
-        });
-    });
-    return transactions;
-}
+export const getTransactions = (accounts, categories) => {
+    // let transactions = [];
+    // $.ajax({
+    //     method: "get",
+    //     url: "http://localhost:3000/transactions",
+    // }).done((data) => {
+    //     $.each(data, (index, value) => {
+    //         transactions.push(value);
+    //     });
+    // });
+    // return transactions;
+};
 
 export const addTransaction = (transaction) => {
     let inputTransaction = {
@@ -19,30 +19,49 @@ export const addTransaction = (transaction) => {
         type: "",
         amount: 0,
         categoryId: 0,
-        description: ""
+        description: "",
     };
 
     let inputTypeTransaction = $(".transactionsFieldset").children();
 
     inputTypeTransaction.each(function (index, fieldset) {
-        if (fieldset.value === "deposit" || fieldset.value === "withdraw" && fieldset.checked) {
-            inputTransaction.accountId = parseInt($("#selectionAccounts").children(":selected").attr("id"));
+        if (
+            fieldset.value === "deposit" ||
+            (fieldset.value === "withdraw" && fieldset.checked)
+        ) {
+            inputTransaction.accountId = parseInt(
+                $("#selectionAccounts").children(":selected").attr("id")
+            );
             inputTransaction.type = fieldset.value;
-            inputTransaction.amount = parseFloat($("#transactionInputAmount").val());
-            inputTransaction.categoryId = parseInt($("#selectionCategory").children(":selected").attr("id"));
-            inputTransaction.description = $("#transactionInputDescription").val();
-        }
-        else if (fieldset.value === "transfer" && fieldset.checked) {
-            inputTransaction.accountId = "null"
+            inputTransaction.amount = parseFloat(
+                $("#transactionInputAmount").val()
+            );
+            inputTransaction.categoryId = parseInt(
+                $("#selectionCategory").children(":selected").attr("id")
+            );
+            inputTransaction.description = $(
+                "#transactionInputDescription"
+            ).val();
+        } else if (fieldset.value === "transfer" && fieldset.checked) {
+            inputTransaction.accountId = "null";
             inputTransaction.type = fieldset.value;
-            inputTransaction.amount = parseFloat($("#transactionInputAmount").val());
-            inputTransaction.categoryId = parseInt($("#selectionCategory").children(":selected").attr("id"));
-            inputTransaction.description = $("#transactionInputDescription").val();
-            inputTransaction.accountIdFrom = parseInt($("#inputFromSelect").children(":selected").attr("id"));
-            inputTransaction.accountIdTo = parseInt($("#inputToSelect").children(":selected").attr("id"));
-
+            inputTransaction.amount = parseFloat(
+                $("#transactionInputAmount").val()
+            );
+            inputTransaction.categoryId = parseInt(
+                $("#selectionCategory").children(":selected").attr("id")
+            );
+            inputTransaction.description = $(
+                "#transactionInputDescription"
+            ).val();
+            inputTransaction.accountIdFrom = parseInt(
+                $("#inputFromSelect").children(":selected").attr("id")
+            );
+            inputTransaction.accountIdTo = parseInt(
+                $("#inputToSelect").children(":selected").attr("id")
+            );
         }
-    })
+    });
     if (inputTransaction.type === "transfer") {
         if (inputTransaction.accountIdFrom === inputTransaction.accountIdTo) {
             alert("You can't transfer money to the same account!");
@@ -62,7 +81,10 @@ export const addTransaction = (transaction) => {
         }
     }
 
-    if (inputTransaction.type === "deposit" || inputTransaction.type === "withdraw") {
+    if (
+        inputTransaction.type === "deposit" ||
+        inputTransaction.type === "withdraw"
+    ) {
         if (!inputTransaction.accountId) {
             alert("Please select an account!");
             return;
@@ -87,15 +109,15 @@ export const addTransaction = (transaction) => {
                 type: inputTransaction.type,
                 amount: inputTransaction.amount,
                 categoryId: inputTransaction.categoryId,
-                description: inputTransaction.description
-            })
+                description: inputTransaction.description,
+            }),
         },
         url: "http://localhost:3000/transactions",
         dataType: "json",
     }).done((data) => {
         console.log("data", data);
         alert("Transaction added!");
-    })
+    });
 
     $("#transactionInputAmount").val("");
     $("#transactionInputDescription").val("");
@@ -104,4 +126,6 @@ export const addTransaction = (transaction) => {
     }
     $("#selectionCategory").val("default");
     $("#selectionAccounts").val("default");
+
 }
+
