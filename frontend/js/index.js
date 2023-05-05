@@ -5,69 +5,15 @@ import {
     renderCategory,
 } from "./helpers/Category.js";
 
+import { getAccounts } from "./helpers/Account.js";
+
 import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
 
 $(async () => {
     getAccountsOptions();
-    // const categories = await getCategories();
+    const categories = await getCategories();
+    const accounts = await getAccounts();
 
-    const categories = [
-        {
-            id: 1,
-            name: "re",
-        },
-        {
-            id: 2,
-            name: "ret",
-        },
-    ];
-    console.log(" categories", categories);
-
-    let accounts = [
-        {
-            id: 1,
-            username: "Arthur",
-            transactions: [
-                {
-                    accountId: 1,
-                    accountIdFrom: "null",
-                    accountIdTo: "null",
-                    type: "deposit",
-                    amount: 8890,
-                    categoryId: 1,
-                    description: "May",
-                    id: 1,
-                },
-                {
-                    accountId: 1,
-                    accountIdFrom: "null",
-                    accountIdTo: "null",
-                    type: "deposit",
-                    amount: 678,
-                    categoryId: 1,
-                    description: "June",
-                    id: 2,
-                },
-            ],
-        },
-        {
-            username: "Zoey",
-            id: 2,
-            transactions: [
-                {
-                    accountId: 2,
-                    accountIdFrom: "null",
-                    accountIdTo: "null",
-                    type: "deposit",
-                    amount: 732,
-                    categoryId: 2,
-                    description: "44",
-                    id: 3,
-                },
-            ],
-        },
-    ];
-    // getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
