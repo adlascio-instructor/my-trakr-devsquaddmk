@@ -11,6 +11,8 @@ import {
     getAccountsOptions
 } from "./helpers/Common.js";
 
+import { getAccounts, addNewAccount } from "./helpers/Account.js";
+
 
 
 
@@ -19,20 +21,25 @@ $(async () => {
 
     getAccountsOptions();
     const categories = await getCategories();
-    console.log("categories", categories);
+    const accounts = await getAccounts();
+
+    console.log("savedAccounts", accounts);
 
 
-    let accounts = [{ name: "Diogo" }]
+
+
     // getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
 
-    // renderSavedCategories(categories);
+    renderSavedCategories(categories);
 
 
 
-
+    $("#accountForm").submit(event => {
+        addNewAccount();
+    })
 
 
     $("#transactionInputAmount").on("change", function () {
@@ -78,7 +85,6 @@ $(async () => {
     $("#addTransactionInput").click(function (event) {
         event.preventDefault();
         addTransaction();
-        console.log("categoriesBeforeCalling", categories);
         getTransactions(accounts, categories);
 
 
@@ -112,6 +118,7 @@ $(async () => {
                 categories.push(newCategory);
                 renderCategory(newCategory);
                 $(".newCategoryContainer").css("display", "none");
+                $("#selectionCategory").val("default");
             }
         }
     });

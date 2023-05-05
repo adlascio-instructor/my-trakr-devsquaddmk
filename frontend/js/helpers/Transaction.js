@@ -1,4 +1,6 @@
-export const getTransactions = (accounts, categories) => { };
+export const getTransactions = (accounts, categories) => {
+
+};
 
 export const addTransaction = () => {
     let inputTransaction = {
@@ -87,6 +89,31 @@ export const addTransaction = () => {
             return;
         }
     }
+
+    if (inputTransaction.type === "deposit") {
+        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let balance = parseInt(accountDestination.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        accountDestination.children(".balance").text(balance + amount);
+    }
+
+
+    if (inputTransaction.type === "withdraw") {
+        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let balance = parseInt(accountDestination.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        if (balance <= amount) {
+            alert("You can't withdraw more than your balance!");
+            return
+        } else {
+            accountDestination.children(".balance").text(balance - amount);
+        }
+
+    }
+
+
+
+    //transfer -> se o balance da conta onde for feita a subratracao for zero, não pode fazer transfer
 
     $.ajax({
         method: "post",
