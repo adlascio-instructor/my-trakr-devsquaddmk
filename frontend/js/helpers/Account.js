@@ -4,9 +4,9 @@ export const getAccounts = () => {
         method: "get",
         url: "http://localhost:3000/accounts",
     }).done((accounts) => {
+        console.log("coming from the server", accounts);
         const savedAccounts = [];
         $.each(accounts, (index, account) => {
-            renderAccounts(account)
             savedAccounts.push({
                 id: account.id,
                 name: account.username,
@@ -17,9 +17,12 @@ export const getAccounts = () => {
     });
 }
 
-
 export const addNewAccount = () => {
     const inputAccount = $(".inputAccount").val();
+    if (inputAccount === "" || inputAccount === undefined) {
+        alert("Please enter a name for the account!")
+        return;
+    }
     $.ajax({
         method: "post",
         data: {

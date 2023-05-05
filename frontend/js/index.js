@@ -38,7 +38,10 @@ $(async () => {
 
 
     $("#accountForm").submit(event => {
+
+
         addNewAccount();
+
     })
 
 

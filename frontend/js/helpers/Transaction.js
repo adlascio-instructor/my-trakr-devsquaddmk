@@ -102,7 +102,7 @@ export const addTransaction = () => {
         let accountDestination = $(`.account#${inputTransaction.accountId}`)
         let balance = parseInt(accountDestination.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
-        if (balance <= amount) {
+        if (balance < amount) {
             alert("You can't withdraw more than your balance!");
             return
         } else {
@@ -111,9 +111,20 @@ export const addTransaction = () => {
 
     }
 
-
-
-    //transfer -> se o balance da conta onde for feita a subratracao for zero, não pode fazer transfer
+    if (inputTransaction.type === "transfer") {
+        let accountFrom = $(`.account#${inputTransaction.accountIdFrom}`)
+        let accountTo = $(`.account#${inputTransaction.accountIdTo}`)
+        let balanceFrom = parseInt(accountFrom.children(".balance").text());
+        let balanceTo = parseInt(accountTo.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        if (balanceFrom < amount) {
+            alert("You can't transfer more than your balance!");
+            return
+        } else {
+            accountFrom.children(".balance").text(balanceFrom - amount);
+            accountTo.children(".balance").text(balanceTo + amount);
+        }
+    }
 
     $.ajax({
         method: "post",

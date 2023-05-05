@@ -56,18 +56,28 @@ main {
         justify-content: flex-end;
         margin-bottom: 2rem;
         #accountForm {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
 
             h1 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
+                font-size: 1rem;
+                font-weight: 500;
+                text-align: right;
+                margin-right: 0.5rem;
+                
+                
             }
 
             input {
                 width: 15rem;
                 padding: 0.3rem;
+                margin-right: 0.2rem;
             }
 
             button {
+                width: 40%;
                 padding: {
                     top: 0.5rem;
                     bottom: 0.5rem;
@@ -94,6 +104,66 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
+        ul{
+            width: 39%;
+            display: flex;
+            flex-direction: column;
+
+            li{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+                .account-name{
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 50%;
+                    padding: {
+                        top: 0.1rem;
+                        bottom: 0.1rem;
+                        left: 0.6rem;
+                        right: 0.6rem;
+                    };
+                }
+                .balance{
+                    display: flex;
+                    justify-content: flex-start;
+                    width: 50%;
+                    padding: {
+                        top: 0.1rem;
+                        bottom: 0.1rem;
+                        left: 0.6rem;
+                        right: 0.6rem;
+                    };
+                    } 
+                }
+            }
+        }
+        h1{
+            width: 39%;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .accountsInfo{
+            display: flex;
+            width: 39%;
+            height: 5.5vh;
+            justify-content: space-between;
+            margin-top: 1rem;
+            background-color: #B8B8B8;
+            border-bottom: 1px solid black;
+            .accountName{
+                width: 50%;
+                display: flex;
+                justify-content: flex-start;
+                padding: 0.6rem;
+            }
+            .accountBalance{
+                width: 50%;
+                display: flex;
+                justify-content: flex-start;
+                padding: 0.6rem;
+            }
+        }
     }
     .transactionsContainer {
         margin-bottom: 2rem;
@@ -242,4 +312,4 @@ main {
             }
         }
     }
-}
+
