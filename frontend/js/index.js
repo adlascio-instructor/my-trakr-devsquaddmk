@@ -3,9 +3,12 @@ import {
     addCategory,
     getCategories,
     renderCategory,
+    renderSavedCategories,
 } from "./helpers/Category.js";
 
-import { getAccounts } from "./helpers/Account.js";
+import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
+
+import { getAccounts, addNewAccount } from "./helpers/Account.js";
 
 import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
 
@@ -14,9 +17,18 @@ $(async () => {
     const categories = await getCategories();
     const accounts = await getAccounts();
 
+    console.log("savedAccounts", accounts);
+
+    // getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
+
+    renderSavedCategories(categories);
+
+    $("#accountForm").submit((event) => {
+        addNewAccount();
+    });
 
     $("#transactionInputAmount").on("change", function () {
         let inputAmmount = $(this).val();
@@ -58,9 +70,8 @@ $(async () => {
     });
 
     $("#addTransactionInput").click(function (event) {
-        // event.preventDefault();
-        // addTransaction();
-        // console.log("categoriesBeforeCalling", categories);
+        event.preventDefault();
+        addTransaction();
         getTransactions(accounts, categories);
     });
 
@@ -88,6 +99,7 @@ $(async () => {
                 categories.push(newCategory);
                 renderCategory(newCategory);
                 $(".newCategoryContainer").css("display", "none");
+                $("#selectionCategory").val("default");
             }
         }
     });
