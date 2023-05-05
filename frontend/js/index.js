@@ -10,8 +10,6 @@ import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
 
 import { getAccounts, addNewAccount } from "./helpers/Account.js";
 
-import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
-
 $(async () => {
     getAccountsOptions();
     const categories = await getCategories();
@@ -19,7 +17,7 @@ $(async () => {
 
     console.log("savedAccounts", accounts);
 
-    // getTransactions(accounts, categories);
+    getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");

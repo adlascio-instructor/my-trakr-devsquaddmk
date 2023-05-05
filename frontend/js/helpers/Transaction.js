@@ -1,8 +1,9 @@
 import { getNameCategory } from "./Category.js";
+import { getNameAccount } from "./Account.js";
 
 export const getTransactions = (accounts, categories) => {
     // console.log("inside");
-    // console.log(accounts);
+    console.log("accounts", accounts);
     // console.log(categories);
     $.each(accounts, function (indexInArray, account) {
         $.each(account.transactions, function (indexInArray, transactions) {
@@ -12,22 +13,38 @@ export const getTransactions = (accounts, categories) => {
                     transactions.categoryId,
                     categories
                 );
-                $("#transInformation").append(`<tr>
+                let accountNameFrom = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                let accountNameTo = getNameAccount(
+                    transactions.accountIdTo,
+                    accounts
+                );
+                $("tbody").append(`<tr class="addInformation">
                         <td>${transactions.id}</td>
                         <td>${account.username}</td>
                         <td>${transactions.type}</td>
                         <td>${categoryName}</td>
                         <td>${transactions.description}</td>
                         <td>${transactions.amount}</td>
-                        <td>${transactions.accountIdFrom}</td>
-                        <td>${transactions.accountIdTo}</td
+                        <td>${accountNameFrom}</td>
+                        <td>${accountNameTo}</td
                         </tr>`);
             } else {
                 let categoryName = getNameCategory(
                     transactions.categoryId,
                     categories
                 );
-                $("#transInformation").append(`<tr>
+                let accountNameFrom = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                let accountNameTo = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                $("tbody").append(`<tr class="addInformation">
                         <td>${transactions.id}</td>
                         <td>${account.username}</td>
                         <td>${transactions.type}</td>
