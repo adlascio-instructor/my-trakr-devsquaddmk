@@ -26,9 +26,9 @@ header {
   background-color: #306bac;
 }
 header h1 {
-  font-size: 2rem;
-  font-weight: 400;
-  letter-spacing: 0.5rem;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.3rem;
   color: white;
 }
 
@@ -62,13 +62,13 @@ main .accountsContainer #accountForm button {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #1CAC78;
+  background-color: #1cac78;
   border: none;
   border-radius: 0.2rem;
   color: white;
 }
 main .accountsContainer #accountForm button:hover {
-  background-color: #1E7E5C;
+  background-color: #1e7e5c;
 }
 main .summaryAccounts {
   display: flex;
@@ -148,12 +148,12 @@ main .transactionsContainer #transactionsForm .settingsTransactions .settingCate
   padding-left: 1rem;
   padding-right: 1rem;
   margin-left: 0.3rem;
-  background-color: #FD7F20;
+  background-color: #fd7f20;
   border: none;
   border-radius: 0.2rem;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingCategory .newCategoryContainer button:hover {
-  background-color: #E56E1B;
+  background-color: #e56e1b;
 }
 main .transactionsContainer #transactionsForm .settingsTransactions .settingAmmount {
   display: flex;
@@ -184,4 +184,30 @@ main .transactionsContainer #transactionsForm input[type=submit] {
 }
 main .transactionsContainer #transactionsForm input[type=submit]:hover {
   background-color: #1e4a7e;
+}
+main table {
+  width: 100%;
+}
+main table tbody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main table tbody #transInformation {
+  display: flex;
+}
+main table tbody #transInformation th {
+  padding: 0.5rem 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+main table tbody .addInformation {
+  display: flex;
+}
+main table tbody .addInformation td {
+  padding: 0.2rem 0;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }/*# sourceMappingURL=index.css.map */
