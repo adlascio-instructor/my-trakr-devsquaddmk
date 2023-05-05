@@ -1,17 +1,5 @@
 export const getTransactions = (accounts, categories) => {
-    // console.log("accounts", accounts);
-    console.log("categories inside RENDER METHOD TRANSACTION", categories);
-    // let transactions = [];
-    // $.ajax({
-    //     method: "get",
-    //     url: "http://localhost:3000/transactions",
-    // }).done((data) => {
-    //     $.each(data, (index, value) => {
-    //         transactions.push(value);
-    //     });
-    // });
-    // return transactions;
-    // console.log("transactionsMethod");
+
 };
 
 export const addTransaction = () => {
@@ -101,6 +89,31 @@ export const addTransaction = () => {
             return;
         }
     }
+
+    if (inputTransaction.type === "deposit") {
+        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let balance = parseInt(accountDestination.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        accountDestination.children(".balance").text(balance + amount);
+    }
+
+
+    if (inputTransaction.type === "withdraw") {
+        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let balance = parseInt(accountDestination.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        if (balance <= amount) {
+            alert("You can't withdraw more than your balance!");
+            return
+        } else {
+            accountDestination.children(".balance").text(balance - amount);
+        }
+
+    }
+
+
+
+    //transfer -> se o balance da conta onde for feita a subratracao for zero, não pode fazer transfer
 
     $.ajax({
         method: "post",

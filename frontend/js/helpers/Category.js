@@ -35,20 +35,20 @@ export const addCategory = (category) => {
             newCategory: category,
         },
     }).done((data) => {
-        $("#newCategoryName").val("");
         alert("Category added!");
         return data
     });
 
 };
 
-
-
-
 export const renderCategory = (category) => {
     $("#selectionCategory").append(
         `<option id="${category.id}" value="${category.name}">${category.name}</option>`
     );
+}
 
-
+export const renderSavedCategories = (categories) => {
+    $.each(categories, (index, category) => {
+        renderCategory(category);
+    });
 }
