@@ -1,4 +1,3 @@
-
 export const getAccounts = () => {
     return $.ajax({
         method: "get",
@@ -10,10 +9,10 @@ export const getAccounts = () => {
             savedAccounts.push({
                 id: account.id,
                 name: account.username,
-                balance: 0
-            })
-        })
-        return savedAccounts
+                balance: 0,
+            });
+        });
+        return savedAccounts;
     });
 }
 
@@ -32,35 +31,23 @@ export const addNewAccount = () => {
         dataType: "json",
     }).done((account) => {
         renderAccounts(account);
-    })
-
-}
+    });
+};
 
 export const renderAccounts = (account) => {
     $(".summaryAccounts").children("ul").append(`
         <li class="account" id=${account.id}>
           <h3 class="account-name">${account.username}</h3>
           <h3 class="balance">0</h3>
-        </li>`)
-}
-
-
-
-
+        </li>`);
+};
 
 export const getNameAccount = (id, accounts) => {
     let name = "";
     $.each(accounts, (index, value) => {
         if (id === value.id) {
-            name = value.username
+            name = value.username;
         }
-    })
+    });
     return name;
-
-}
-
-
-
-
-
-
+};

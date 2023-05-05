@@ -1,5 +1,62 @@
-export const getTransactions = (accounts, categories) => {
+import { getNameCategory } from "./Category.js";
+import { getNameAccount } from "./Account.js";
 
+export const getTransactions = (accounts, categories) => {
+    // console.log("inside");
+    console.log("accounts", accounts);
+    // console.log(categories);
+    $.each(accounts, function (indexInArray, account) {
+        $.each(account.transactions, function (indexInArray, transactions) {
+            // console.log("Transactions", transactions);
+            if (transactions.type === "transfer") {
+                let categoryName = getNameCategory(
+                    transactions.categoryId,
+                    categories
+                );
+                let accountNameFrom = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                let accountNameTo = getNameAccount(
+                    transactions.accountIdTo,
+                    accounts
+                );
+                $("tbody").append(`<tr class="addInformation">
+                        <td>${transactions.id}</td>
+                        <td>${account.username}</td>
+                        <td>${transactions.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transactions.description}</td>
+                        <td>${transactions.amount}</td>
+                        <td>${accountNameFrom}</td>
+                        <td>${accountNameTo}</td
+                        </tr>`);
+            } else {
+                let categoryName = getNameCategory(
+                    transactions.categoryId,
+                    categories
+                );
+                let accountNameFrom = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                let accountNameTo = getNameAccount(
+                    transactions.accountIdFrom,
+                    accounts
+                );
+                $("tbody").append(`<tr class="addInformation">
+                        <td>${transactions.id}</td>
+                        <td>${account.username}</td>
+                        <td>${transactions.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transactions.description}</td>
+                        <td>${transactions.amount}</td>
+                        <td>N/A</td>
+                        <td>N/A</td
+                        </tr>`);
+            }
+        });
+    });
 };
 
 export const addTransaction = () => {
@@ -91,24 +148,22 @@ export const addTransaction = () => {
     }
 
     if (inputTransaction.type === "deposit") {
-        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let accountDestination = $(`.account#${inputTransaction.accountId}`);
         let balance = parseInt(accountDestination.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
         accountDestination.children(".balance").text(balance + amount);
     }
 
-
     if (inputTransaction.type === "withdraw") {
-        let accountDestination = $(`.account#${inputTransaction.accountId}`)
+        let accountDestination = $(`.account#${inputTransaction.accountId}`);
         let balance = parseInt(accountDestination.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
         if (balance < amount) {
             alert("You can't withdraw more than your balance!");
-            return
+            return;
         } else {
             accountDestination.children(".balance").text(balance - amount);
         }
-
     }
 
     if (inputTransaction.type === "transfer") {
@@ -153,6 +208,4 @@ export const addTransaction = () => {
     }
     $("#selectionCategory").val("default");
     $("#selectionAccounts").val("default");
-
-}
-
+};

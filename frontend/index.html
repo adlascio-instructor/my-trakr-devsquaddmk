@@ -94,7 +94,7 @@
             <h5>Description:</h5>
             <input id="transactionInputDescription" type="text" />
 
-            <h5>Ammount:</h5>
+            <h5>Amount:</h5>
             <input id="transactionInputAmount" type="number" min="1" required/>
           </div>
 
@@ -111,26 +111,18 @@
       <select></select>
     </div>
     <table>
-      <tr id="transInformation">
-        <th>ID</th>
-        <th>User</th>
-        <th>Type</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>From</th>
-        <th>To</th>
-      </tr>
-      <!-- <tr>
-        <td id="id"></th>
-        <td id="userName"></th>
-        <td id="transactionType"></th>
-        <td id="category"></th>
-        <td id="description"></th>
-        <td id="amount"></th>
-        <td id="from"></th>
-        <td id="to"></th>
-      </tr> -->
+      <tbody>
+        <tr id="transInformation">
+          <th>ID</th>
+          <th>User</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </tbody>
     </table>
   </main>
   <script type="module" src="./js/helpers/Account.js" defer></script>

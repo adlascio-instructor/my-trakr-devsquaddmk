@@ -3,32 +3,21 @@ import {
     addCategory,
     getCategories,
     renderCategory,
-    renderSavedCategories
+    renderSavedCategories,
 } from "./helpers/Category.js";
 
-import {
-    getIdSelectedAccount,
-    getAccountsOptions
-} from "./helpers/Common.js";
+import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
 
 import { getAccounts, addNewAccount } from "./helpers/Account.js";
 
-
-
-
 $(async () => {
-
-
     getAccountsOptions();
     const categories = await getCategories();
     const accounts = await getAccounts();
 
     console.log("savedAccounts", accounts);
 
-
-
-
-    // getTransactions(accounts, categories);
+    getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
@@ -84,18 +73,11 @@ $(async () => {
         }
     });
 
-
     $("#addTransactionInput").click(function (event) {
         event.preventDefault();
         addTransaction();
         getTransactions(accounts, categories);
-
-
-
     });
-
-
-
 
     $("#newCategoryButton").click(async function (event) {
         let inputCategoryName = $("#newCategoryName").val();
@@ -125,6 +107,4 @@ $(async () => {
             }
         }
     });
-
-
 });
