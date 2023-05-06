@@ -107,6 +107,7 @@ main {
                 display: flex;
                 width: 100%;
                 justify-content: space-between;
+                margin-top: 0.5rem;
                 .account-name{
                     display: flex;
                     justify-content: flex-start;
@@ -297,30 +298,49 @@ main {
         }
     }
     table {
+        margin-top: 1rem;
         width: 100%;
+        
         tbody {
             width: 100%;
             display: flex;
             flex-direction: column;
+            border-spacing: 10rem 10rem;
+            background-color: #FAF9F6;
 
-            #transInformation {
+            #transactionsContainer {
                 display: flex;
+                background-color: #B9D9EB;
+                border-bottom: 1px solid black;
+                
                 th {
-                    padding: 0.5rem 0;
+                    padding: {
+                        top: 0.5rem;
+                        bottom: 0.5rem;
+                    };
                     width: 100%;
                     box-sizing: border-box;
                     text-align: center;
                 }
             }
-            .addInformation {
+            .transactionsInfo {
                 display: flex;
                 td {
-                    padding: 0.2rem 0;
+                    padding: {
+                        top: 0.5rem;
+                        bottom: 0.5rem;
+                    };
                     width: 100%;
                     box-sizing: border-box;
                     text-align: center;
                 }
             }
+        }
+    }
+    .filters{
+        display: flex;
+        h3{
+            margin-right: 0.5rem;
         }
     }
 

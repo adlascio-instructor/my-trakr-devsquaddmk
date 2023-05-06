@@ -8,7 +8,7 @@ export const getIdSelectedAccount = (element) => {
     });
 };
 
-export const getAccountsOptions = () => {
+export const getAccountsInfos = () => {
     $.ajax({
         method: "get",
         url: "http://localhost:3000/accounts",
@@ -21,9 +21,6 @@ export const getAccountsOptions = () => {
                 `<option id="${value.id}" value="${value.username}">${value.username}</option>`
             );
 
-
-
-            console.log("valueTransactions", value.transactions);
 
             let updatedBalance = value.transactions.reduce((acc, transaction) => {
                 if (transaction.type === "deposit") {
@@ -42,6 +39,10 @@ export const getAccountsOptions = () => {
                     <h3 class="account-name">${value.username}</h3>
                     <h3 class="balance">${updatedBalance}</h3>
                 </li>`);
+
+            $("#filterByAccount").append(
+                `<option id="${value.id}" value="${value.username}">${value.username}</option>`
+            )
 
 
 

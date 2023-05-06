@@ -3,7 +3,6 @@ export const getAccounts = () => {
         method: "get",
         url: "http://localhost:3000/accounts",
     }).done((accounts) => {
-        console.log("coming from the server", accounts);
         const savedAccounts = [];
         $.each(accounts, (index, account) => {
             savedAccounts.push({
@@ -51,3 +50,19 @@ export const getNameAccount = (id, accounts) => {
     });
     return name;
 };
+
+export const accountsFilter = (userName, transactionsOnScreen) => {
+    transactionsOnScreen.each((index, transaction) => {
+        let transactionAccount = transaction.children[1].innerText;
+        if (transactionAccount === userName) {
+            console.log("transaction", transaction);
+            $(transaction).css("display", "flex");
+        } else {
+            $(transaction).css("display", "none");
+        }
+
+
+    });
+
+
+}
