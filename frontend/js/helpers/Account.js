@@ -5,7 +5,6 @@ export const getAccounts = () => {
     }).done((accounts) => {
         const savedAccounts = [];
         $.each(accounts, (index, account) => {
-            renderAccounts(account);
             savedAccounts.push({
                 id: account.id,
                 name: account.username,
@@ -14,10 +13,14 @@ export const getAccounts = () => {
         });
         return savedAccounts;
     });
-};
+}
 
 export const addNewAccount = () => {
     const inputAccount = $(".inputAccount").val();
+    if (inputAccount === "" || inputAccount === undefined) {
+        alert("Please enter a name for the account!")
+        return;
+    }
     $.ajax({
         method: "post",
         data: {
@@ -47,3 +50,19 @@ export const getNameAccount = (id, accounts) => {
     });
     return name;
 };
+
+export const accountsFilter = (userName, transactionsOnScreen) => {
+    transactionsOnScreen.each((index, transaction) => {
+        let transactionAccount = transaction.children[1].innerText;
+        if (transactionAccount === userName) {
+            console.log("transaction", transaction);
+            $(transaction).css("display", "flex");
+        } else {
+            $(transaction).css("display", "none");
+        }
+
+
+    });
+
+
+}

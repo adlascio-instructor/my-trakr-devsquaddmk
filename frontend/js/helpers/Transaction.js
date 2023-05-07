@@ -2,64 +2,124 @@ import { getNameCategory } from "./Category.js";
 import { getNameAccount } from "./Account.js";
 
 export const getTransactions = (accounts, categories) => {
-    // console.log("inside");
-    console.log("accounts", accounts);
-    // console.log(categories);
-    $.each(accounts, function (indexInArray, account) {
-        $.each(account.transactions, function (indexInArray, transactions) {
-            // console.log("Transactions", transactions);
-            if (transactions.type === "transfer") {
+    $.ajax({
+        method: "get",
+        url: "http://localhost:3000/transactions",
+    }).done((data) => {
+        console.log("data", data);
+
+        let organizedTransactions = data.flat().sort((a, b) => a.id - b.id);
+
+        $.each(organizedTransactions, (index, transaction) => {
+            if (transaction.type === "transfer") {
                 let categoryName = getNameCategory(
-                    transactions.categoryId,
+                    transaction.categoryId,
                     categories
                 );
                 let accountNameFrom = getNameAccount(
-                    transactions.accountIdFrom,
+                    transaction.accountIdFrom,
                     accounts
                 );
                 let accountNameTo = getNameAccount(
-                    transactions.accountIdTo,
+                    transaction.accountIdTo,
                     accounts
                 );
-                $("tbody").append(`<tr class="addInformation">
-                        <td>${transactions.id}</td>
-                        <td>${account.username}</td>
-                        <td>${transactions.type}</td>
+                let username = getNameAccount(
+                    transaction.accountId,
+                    accounts
+                )
+                $("tbody").append(`<tr class="transactionsInfo" id=${transaction.id}>
+                        <td>${transaction.id}</td>
+                        <td>${username}</td>
+                        <td>${transaction.type}</td>
                         <td>${categoryName}</td>
-                        <td>${transactions.description}</td>
-                        <td>${transactions.amount}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount}</td>
                         <td>${accountNameFrom}</td>
                         <td>${accountNameTo}</td
                         </tr>`);
+
             } else {
                 let categoryName = getNameCategory(
-                    transactions.categoryId,
+                    transaction.categoryId,
                     categories
                 );
-                let accountNameFrom = getNameAccount(
-                    transactions.accountIdFrom,
+                let username = getNameAccount(
+                    transaction.accountId,
                     accounts
-                );
-                let accountNameTo = getNameAccount(
-                    transactions.accountIdFrom,
-                    accounts
-                );
-                $("tbody").append(`<tr class="addInformation">
-                        <td>${transactions.id}</td>
-                        <td>${account.username}</td>
-                        <td>${transactions.type}</td>
+                )
+                $("tbody").append(`<tr class="transactionsInfo"id=${transaction.id}>
+                        <td>${transaction.id}</td>
+                        <td>${username}</td>
+                        <td>${transaction.type}</td>
                         <td>${categoryName}</td>
-                        <td>${transactions.description}</td>
-                        <td>${transactions.amount}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount}</td>
                         <td>N/A</td>
                         <td>N/A</td
                         </tr>`);
             }
         });
     });
-};
+}
 
-export const addTransaction = () => {
+
+
+export const renderTransaction = (transactions, accounts, categories) => {
+    $.each(transactions, function (indexInArray, transaction) {
+        if (transaction.type === "transfer") {
+            let categoryName = getNameCategory(
+                transaction.categoryId,
+                categories
+            );
+            let accountNameFrom = getNameAccount(
+                transaction.accountIdFrom,
+                accounts
+            );
+            let accountNameTo = getNameAccount(
+                transaction.accountIdTo,
+                accounts
+            );
+            let account = getNameAccount(transaction.accountId, accounts);
+            $("tbody").append(`<tr class="transactionsInfo" id=${transaction.id}>
+                        <td>${transaction.id}</td>
+                        <td>${account}</td>
+                        <td>${transaction.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount}</td>
+                        <td>${accountNameFrom}</td>
+                        <td>${accountNameTo}</td
+                        </tr>`);
+        } else {
+            let categoryName = getNameCategory(
+                transaction.categoryId,
+                categories
+            );
+            let accountNameFrom = getNameAccount(
+                transaction.accountIdFrom,
+                accounts
+            );
+            let accountNameTo = getNameAccount(
+                transaction.accountIdFrom,
+                accounts
+            );
+            let account = getNameAccount(transaction.accountId, accounts);
+            $("tbody").append(`<tr class="transactionsInfo" id=${transaction.id}>
+                        <td>${transaction.id}</td>
+                        <td>${account}</td>
+                        <td>${transaction.type}</td>
+                        <td>${categoryName}</td>
+                        <td>${transaction.description}</td>
+                        <td>${transaction.amount}</td>
+                        <td>N/A</td>
+                        <td>N/A</td
+                        </tr>`);
+        }
+    })
+}
+
+export const addTransaction = async () => {
     let inputTransaction = {
         accountId: 0,
         accountIdFrom: "null",
@@ -158,7 +218,7 @@ export const addTransaction = () => {
         let accountDestination = $(`.account#${inputTransaction.accountId}`);
         let balance = parseInt(accountDestination.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
-        if (balance <= amount) {
+        if (balance < amount) {
             alert("You can't withdraw more than your balance!");
             return;
         } else {
@@ -166,9 +226,22 @@ export const addTransaction = () => {
         }
     }
 
-    //transfer -> se o balance da conta onde for feita a subratracao for zero, não pode fazer transfer
+    if (inputTransaction.type === "transfer") {
+        let accountFrom = $(`.account#${inputTransaction.accountIdFrom}`)
+        let accountTo = $(`.account#${inputTransaction.accountIdTo}`)
+        let balanceFrom = parseInt(accountFrom.children(".balance").text());
+        let balanceTo = parseInt(accountTo.children(".balance").text());
+        let amount = parseInt(inputTransaction.amount);
+        if (balanceFrom < amount) {
+            alert("You can't transfer more than your balance!");
+            return
+        } else {
+            accountFrom.children(".balance").text(balanceFrom - amount);
+            accountTo.children(".balance").text(balanceTo + amount);
+        }
+    }
 
-    $.ajax({
+    return $.ajax({
         method: "post",
         data: {
             newTransaction: JSON.stringify({
@@ -184,15 +257,17 @@ export const addTransaction = () => {
         url: "http://localhost:3000/transactions",
         dataType: "json",
     }).done((data) => {
-        console.log("data", data);
+        $("#transactionInputAmount").val("");
+        $("#transactionInputDescription").val("");
+        if ($(".fromTo").css("display") == "flex") {
+            $(".fromToSelections").val("default");
+        }
+        $("#selectionCategory").val("default");
+        $("#selectionAccounts").val("default");
         alert("Transaction added!");
+        // console.log("data", data);
+        return data
+
     });
 
-    $("#transactionInputAmount").val("");
-    $("#transactionInputDescription").val("");
-    if ($(".fromTo").css("display") == "flex") {
-        $(".fromToSelections").val("default");
-    }
-    $("#selectionCategory").val("default");
-    $("#selectionAccounts").val("default");
 };

@@ -10,8 +10,6 @@ export const getCategories = () => {
                 category: value.name,
             });
         });
-
-        console.log("savedCategories", savedCategories);
         return savedCategories;
     });
 };
@@ -23,7 +21,6 @@ export const getNameCategory = (id, categories) => {
             name = value.name;
         }
     });
-    // console.log("nameFinal", name);
     return name;
 };
 

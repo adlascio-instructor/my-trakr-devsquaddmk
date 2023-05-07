@@ -1,4 +1,8 @@
-import { addTransaction, getTransactions } from "./helpers/Transaction.js";
+import {
+    addTransaction,
+    getTransactions,
+    renderTransaction
+} from "./helpers/Transaction.js";
 import {
     addCategory,
     getCategories,
@@ -6,27 +10,28 @@ import {
     renderSavedCategories,
 } from "./helpers/Category.js";
 
-import { getIdSelectedAccount, getAccountsOptions } from "./helpers/Common.js";
+import { getIdSelectedAccount, getAccountsInfos } from "./helpers/Common.js";
 
-import { getAccounts, addNewAccount } from "./helpers/Account.js";
+import {
+    getAccounts,
+    addNewAccount,
+    accountsFilter
+} from "./helpers/Account.js";
 
 $(async () => {
-    getAccountsOptions();
+    getAccountsInfos();
     const categories = await getCategories();
     const accounts = await getAccounts();
-
-    console.log("savedAccounts", accounts);
-
-    getTransactions(accounts, categories);
     getIdSelectedAccount("#selectionAccounts");
     getIdSelectedAccount("#inputFromSelect");
     getIdSelectedAccount("#inputToSelect");
-
     renderSavedCategories(categories);
+    getTransactions(accounts, categories);
 
-    $("#accountForm").submit((event) => {
+    $("#accountForm").submit(event => {
         addNewAccount();
-    });
+    })
+
 
     $("#transactionInputAmount").on("change", function () {
         let inputAmmount = $(this).val();
@@ -67,10 +72,18 @@ $(async () => {
         }
     });
 
-    $("#addTransactionInput").click(function (event) {
+    $("#filterByAccount").on("change", function () {
+        let value = $(this).val();
+        let transactionsOnScreen = $("#transactionsContainer").siblings();
+        accountsFilter(value, transactionsOnScreen);
+
+
+    })
+
+    $("#addTransactionInput").click(async function (event) {
         event.preventDefault();
-        addTransaction();
-        getTransactions(accounts, categories);
+        let postedTransaction = await addTransaction();
+        renderTransaction(postedTransaction, accounts, categories);
     });
 
     $("#newCategoryButton").click(async function (event) {
