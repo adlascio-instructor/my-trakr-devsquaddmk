@@ -271,3 +271,14 @@ export const addTransaction = async () => {
     });
 
 };
+
+export const typeTransactionFilter = (type, transactionsOnScreen) => {
+    transactionsOnScreen.each((index, transaction) => {
+        let transactionAccount = transaction.children[2].innerText;
+        if (transactionAccount === type) {
+            $(transaction).css("display", "flex");
+        } else {
+            $(transaction).css("display", "none");
+        }
+    });
+}

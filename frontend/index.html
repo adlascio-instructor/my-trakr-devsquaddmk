@@ -108,11 +108,34 @@
 
     <div class="filters">
       <h3>
-        Filter by account:
+        Filter by:
       </h3>
-      <select id="filterByAccount">
-        <option value="default">Select an account</option>
+      <select name="types" id="typesFilter">
+        <option value="default">Select a filter</option>
+        <option value="user">Account</option>
+        <option value="type">Type</option>
+        <option value="category">Category</option>
       </select>
+
+
+      <select id="filterByAccount">
+        <option value="default">All accounts</option>
+      </select>
+
+      <select id="filterByType">
+        <option value="default">All types</option>
+        <option value="deposit">Deposit</option>
+        <option value="withdraw">Withdraw</option>
+        <option value="transfer">Transfer</option>
+      </select>
+
+      <select id="filterByCategory">
+        <option value="default">All categories</option>
+      </select>
+
+      
+
+
     </div>
     <table>
       <tbody>

@@ -1,10 +1,12 @@
 import {
     addTransaction,
     getTransactions,
-    renderTransaction
+    renderTransaction,
+    typeTransactionFilter
 } from "./helpers/Transaction.js";
 import {
     addCategory,
+    categoriesFilter,
     getCategories,
     renderCategory,
     renderSavedCategories,
@@ -15,8 +17,10 @@ import { getIdSelectedAccount, getAccountsInfos } from "./helpers/Common.js";
 import {
     getAccounts,
     addNewAccount,
-    accountsFilter
+    accountsFilter,
+    showAllTransactions
 } from "./helpers/Account.js";
+
 
 $(async () => {
     getAccountsInfos();
@@ -29,7 +33,27 @@ $(async () => {
     getTransactions(accounts, categories);
 
     $("#accountForm").submit(event => {
-        addNewAccount();
+        let inputAccountName = $(".inputAccount").val();
+        if (inputAccountName === "" || inputAccountName === null || inputAccountName === undefined) {
+            alert("Please enter a name!");
+            return;
+        } else {
+            let loadedAccounts = $("#selectionAccounts").children();
+            let accountExists = false;
+            loadedAccounts.each((index, account) => {
+                if (account.innerText.toLowerCase().trim()
+                    === inputAccountName.toLowerCase().trim()) {
+                    accountExists = true;
+                }
+            })
+            if (accountExists) {
+                alert("Account already exists!");
+                return;
+            } else {
+                alert("Account added!");
+                addNewAccount();
+            }
+        }
     })
 
 
@@ -64,6 +88,7 @@ $(async () => {
     });
 
     $("#selectionCategory").on("change", function () {
+        showAllTransactions($("#transactionsContainer").siblings());
         let value = $(this).val();
         if (value === "newCategory") {
             $(".newCategoryContainer").css("display", "flex");
@@ -72,12 +97,59 @@ $(async () => {
         }
     });
 
+    $("#typesFilter").on("change", function () {
+        showAllTransactions($("#transactionsContainer").siblings());
+        let value = $(this).val();
+        if (value === "user") {
+            $("#filterByAccount").css("display", "flex");
+            $("#filterByType").css("display", "none");
+            $("#filterByCategory").css("display", "none");
+        }
+        if (value === "type") {
+            $("#filterByType").css("display", "flex");
+            $("#filterByAccount").css("display", "none");
+            $("#filterByCategory").css("display", "none");
+        }
+        if (value === "category") {
+            $("#filterByCategory").css("display", "flex");
+            $("#filterByType").css("display", "none");
+            $("#filterByAccount").css("display", "none");
+        }
+    })
+
     $("#filterByAccount").on("change", function () {
+        showAllTransactions($("#transactionsContainer").siblings());
         let value = $(this).val();
         let transactionsOnScreen = $("#transactionsContainer").siblings();
-        accountsFilter(value, transactionsOnScreen);
+        if (value === "default") {
+            showAllTransactions(transactionsOnScreen);
+        } else {
+            accountsFilter(value, transactionsOnScreen);
+        }
+    })
 
+    $("#filterByCategory").on("change", function () {
+        showAllTransactions($("#transactionsContainer").siblings());
+        let value = $(this).val();
+        let transactionsOnScreen = $("#transactionsContainer").siblings();
+        if (value === "default") {
+            console.log("default");
+            showAllTransactions(transactionsOnScreen);
+        } else {
+            console.log("not default");
+            categoriesFilter(value, transactionsOnScreen);
+        }
+    })
 
+    $("#filterByType").on("change", function () {
+        showAllTransactions($("#transactionsContainer").siblings());
+        let value = $(this).val();
+        let transactionsOnScreen = $("#transactionsContainer").siblings();
+        if (value === "default") {
+            showAllTransactions(transactionsOnScreen);
+        } else {
+            typeTransactionFilter(value, transactionsOnScreen);
+        }
     })
 
     $("#addTransactionInput").click(async function (event) {
@@ -111,6 +183,7 @@ $(async () => {
                 renderCategory(newCategory);
                 $(".newCategoryContainer").css("display", "none");
                 $("#selectionCategory").val("default");
+                $("#newCategoryName").val("");
             }
         }
     });

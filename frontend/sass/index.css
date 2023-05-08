@@ -290,4 +290,8 @@ table tbody .transactionsInfo td {
 }
 .filters h3 {
   margin-right: 0.5rem;
+}
+.filters #filterByAccount, .filters #filterByType, .filters #filterByCategory {
+  margin-left: 0.5rem;
+  display: none;
 }/*# sourceMappingURL=index.css.map */
