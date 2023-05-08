@@ -41,6 +41,10 @@ export const renderCategory = (category) => {
     $("#selectionCategory").append(
         `<option id="${category.id}" value="${category.name}">${category.name}</option>`
     );
+
+    $("#filterByCategory").append(
+        `<option id="${category.id}" value="${category.name}">${category.name}</option>`
+    )
 };
 
 export const renderSavedCategories = (categories) => {
@@ -48,3 +52,15 @@ export const renderSavedCategories = (categories) => {
         renderCategory(category);
     });
 };
+
+export const categoriesFilter = (category, transactionsOnScreen) => {
+    transactionsOnScreen.each((index, transaction) => {
+        let transactionAccount = transaction.children[3].innerText;
+        if (transactionAccount === category) {
+            $(transaction).css("display", "flex");
+        } else {
+            $(transaction).css("display", "none");
+        }
+    });
+}
+

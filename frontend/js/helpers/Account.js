@@ -17,10 +17,6 @@ export const getAccounts = () => {
 
 export const addNewAccount = () => {
     const inputAccount = $(".inputAccount").val();
-    if (inputAccount === "" || inputAccount === undefined) {
-        alert("Please enter a name for the account!")
-        return;
-    }
     $.ajax({
         method: "post",
         data: {
@@ -60,9 +56,11 @@ export const accountsFilter = (userName, transactionsOnScreen) => {
         } else {
             $(transaction).css("display", "none");
         }
-
-
     });
+}
 
-
+export const showAllTransactions = (transactionsOnScreen) => {
+    transactionsOnScreen.each((index, transaction) => {
+        $(transaction).css("display", "flex");
+    });
 }
