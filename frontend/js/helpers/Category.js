@@ -32,7 +32,6 @@ export const addCategory = (category) => {
             newCategory: category,
         },
     }).done((data) => {
-        alert("Category added!");
         return data;
     });
 };

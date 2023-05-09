@@ -21,7 +21,6 @@ import {
     showAllTransactions
 } from "./helpers/Account.js";
 
-
 $(async () => {
     getAccountsInfos();
     const categories = await getCategories();
@@ -52,6 +51,7 @@ $(async () => {
             } else {
                 alert("Account added!");
                 addNewAccount();
+
             }
         }
     })
@@ -161,7 +161,7 @@ $(async () => {
     $("#newCategoryButton").click(async function (event) {
         let inputCategoryName = $("#newCategoryName").val();
         if (inputCategoryName === "") {
-            alert("Please enter a category name!");
+            notificationAnimation("Please enter a name!", "#ff0000");
             return;
         } else {
             let loadedCategories = $("#selectionCategory").children();
@@ -175,7 +175,7 @@ $(async () => {
                 }
             });
             if (exists) {
-                alert("Category already exists!");
+                notificationAnimation("Category already exists!", "red");
                 return;
             } else {
                 let newCategory = await addCategory(inputCategoryName);
@@ -184,7 +184,25 @@ $(async () => {
                 $(".newCategoryContainer").css("display", "none");
                 $("#selectionCategory").val("default");
                 $("#newCategoryName").val("");
+                notificationAnimation("Category added!", "green");
             }
         }
     });
+
+    $("#closeNotification").click(() => {
+        $(".notification").css("display", "none");
+        console.log("close notification");
+    })
+
+
+
+
 });
+
+export const notificationAnimation = async (message, backgroundColor) => {
+    $(".notificationContainer").css("display", "flex");
+    $(".notification").css("background-color", backgroundColor);
+    $("#notificationMessage").text(message);
+    gsap.fromTo(".notification", { x: 100 }, { duration: 1, x: 0, ease: "bounce" });
+    gsap.to(".notification", { x: 300, duration: 1, delay: 4 })
+}

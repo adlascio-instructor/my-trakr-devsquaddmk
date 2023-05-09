@@ -9,6 +9,7 @@
   <!-- jQuery link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" defer></script>
   <!-- Custom CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
   <link rel="stylesheet" href="./sass/index.css" />
 </head>
 
@@ -16,6 +17,16 @@
   <header>
     <h1>myTrakr</h1>
   </header>
+  <div class="notificationContainer">
+    <div class="notification">
+      <div class="messageContainer">
+        <span id="notificationMessage">Message</span>
+      </div>
+      <div class="buttonContainer">
+        <button id="closeNotification">x</button>
+      </div>
+    </div>
+  </div>
   <main>
 
     <section class="accountsContainer">
@@ -24,7 +35,7 @@
           New Account:
         </h1>
         <input class="inputAccount" type="text" />
-        <button>Add new account</button>
+        <button id="newAccountButton">Add new account</button>
       </form>
 
     </section>
@@ -152,10 +163,12 @@
       </tbody>
     </table>
   </main>
+  <script type="module" src="./js/helpers/Animation.js"></script>
   <script type="module" src="./js/helpers/Account.js" defer></script>
   <script type="module" src="./js/helpers/Category.js" defer></script>
   <script type="module" src="./js/helpers/Common.js" defer></script>
   <script type="module" src="./js/index.js" defer></script>
+  <script src="./js/helpers/Animation.js"></script>
 </body>
 
 </html>
