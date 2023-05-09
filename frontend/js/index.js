@@ -18,8 +18,10 @@ import {
     getAccounts,
     addNewAccount,
     accountsFilter,
-    showAllTransactions
+    showAllTransactions,
+    renderAccounts
 } from "./helpers/Account.js";
+
 
 $(async () => {
     getAccountsInfos();
@@ -31,10 +33,11 @@ $(async () => {
     renderSavedCategories(categories);
     getTransactions(accounts, categories);
 
-    $("#accountForm").submit(event => {
+    $("#newAccountButton").on("click", async function (event) {
         let inputAccountName = $(".inputAccount").val();
         if (inputAccountName === "" || inputAccountName === null || inputAccountName === undefined) {
-            alert("Please enter a name!");
+            event.preventDefault();
+            notificationAnimation("Please enter a name!", "orange");
             return;
         } else {
             let loadedAccounts = $("#selectionAccounts").children();
@@ -46,15 +49,43 @@ $(async () => {
                 }
             })
             if (accountExists) {
-                alert("Account already exists!");
+                event.preventDefault();
+                notificationAnimation("Account already exists!", "red");
                 return;
             } else {
-                alert("Account added!");
-                addNewAccount();
+                event.preventDefault();
+                let newAccount = await addNewAccount(inputAccountName);
+                renderAccounts(newAccount);
+                notificationAnimation("Account added!", "green");
+                $(".inputAccount").val("");
 
             }
         }
     })
+    // $("#accountForm").submit(event => {
+    //     let inputAccountName = $(".inputAccount").val();
+    //     if (inputAccountName === "" || inputAccountName === null || inputAccountName === undefined) {
+    //         alert("Please enter a name!");
+    //         return;
+    //     } else {
+    //         let loadedAccounts = $("#selectionAccounts").children();
+    //         let accountExists = false;
+    //         loadedAccounts.each((index, account) => {
+    //             if (account.innerText.toLowerCase().trim()
+    //                 === inputAccountName.toLowerCase().trim()) {
+    //                 accountExists = true;
+    //             }
+    //         })
+    //         if (accountExists) {
+    //             alert("Account already exists!");
+    //             return;
+    //         } else {
+    //             alert("Account added!");
+    //             addNewAccount();
+
+    //         }
+    //     }
+    // })
 
 
     $("#transactionInputAmount").on("change", function () {
@@ -155,6 +186,9 @@ $(async () => {
     $("#addTransactionInput").click(async function (event) {
         event.preventDefault();
         let postedTransaction = await addTransaction();
+        console.log("posted", postedTransaction);
+        console.log("accounts", accounts);
+        console.log("categories", categories);
         renderTransaction(postedTransaction, accounts, categories);
     });
 

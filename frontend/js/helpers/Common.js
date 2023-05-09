@@ -14,12 +14,12 @@ export const getAccountsInfos = () => {
         url: "http://localhost:3000/accounts",
     }).done((data) => {
         $.each(data, (index, value) => {
-            $("#selectionAccounts").append(
-                `<option id="${value.id}" value="${value.username}">${value.username}</option>`
-            );
-            $(".fromToSelections").append(
-                `<option id="${value.id}" value="${value.username}">${value.username}</option>`
-            );
+            // $("#selectionAccounts").append(
+            //     `<option id="${value.id}" value="${value.username}">${value.username}</option>`
+            // );
+            // $(".fromToSelections").append(
+            //     `<option id="${value.id}" value="${value.username}">${value.username}</option>`
+            // );
 
 
             let updatedBalance = value.transactions.reduce((acc, transaction) => {

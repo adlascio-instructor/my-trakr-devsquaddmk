@@ -17,9 +17,8 @@ export const getAccounts = () => {
     });
 }
 
-export const addNewAccount = () => {
-    const inputAccount = $(".inputAccount").val();
-    $.ajax({
+export const addNewAccount = (inputAccount) => {
+    return $.ajax({
         method: "post",
         data: {
             newAccount: inputAccount,
@@ -27,7 +26,8 @@ export const addNewAccount = () => {
         url: "http://localhost:3000/accounts",
         dataType: "json",
     }).done((account) => {
-        renderAccounts(account);
+        notificationAnimation("Account created successfully");
+        return account;
     });
 };
 
@@ -37,6 +37,13 @@ export const renderAccounts = (account) => {
           <h3 class="account-name">${account.username}</h3>
           <h3 class="balance">0</h3>
         </li>`);
+
+    $("#selectionAccounts").append(
+        `<option id="${account.id}" value="${account.username}">${account.username}</option>`
+    );
+    $(".fromToSelections").append(
+        `<option id="${account.id}" value="${account.username}">${account.username}</option>`
+    );
 
 };
 
