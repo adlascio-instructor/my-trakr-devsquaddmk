@@ -1,5 +1,6 @@
 import { getNameCategory } from "./Category.js";
 import { getNameAccount } from "./Account.js";
+import { notificationAnimation } from "../index.js";
 
 export const getTransactions = (accounts, categories) => {
     $.ajax({
@@ -172,19 +173,19 @@ export const addTransaction = async () => {
     });
     if (inputTransaction.type === "transfer") {
         if (inputTransaction.accountIdFrom === inputTransaction.accountIdTo) {
-            alert("You can't transfer money to the same account!");
+            notificationAnimation("Please select different accounts!", "orange");
             return;
         }
         if (!inputTransaction.accountIdFrom || !inputTransaction.accountIdTo) {
-            alert("Please select a from and to account!");
+            notificationAnimation("Please select an account!", "orange");
             return;
         }
         if (!inputTransaction.categoryId) {
-            alert("Please select a category!");
+            notificationAnimation("Please select a category!", "orange");
             return;
         }
         if (!inputTransaction.amount || inputTransaction.amount < 0) {
-            alert("Please enter an amount!");
+            notificationAnimation("Please enter an amount!", "orange");
             return;
         }
     }
@@ -194,15 +195,15 @@ export const addTransaction = async () => {
         inputTransaction.type === "withdraw"
     ) {
         if (!inputTransaction.accountId) {
-            alert("Please select an account!");
+            notificationAnimation("Please select an account!", "orange");
             return;
         }
         if (!inputTransaction.categoryId) {
-            alert("Please select a category!");
+            notificationAnimation("Please select a category!", "orange");
             return;
         }
         if (!inputTransaction.amount || inputTransaction.amount < 0) {
-            alert("Please enter an amount!");
+            notificationAnimation("Please enter an amount!", "orange");
             return;
         }
     }
@@ -219,7 +220,7 @@ export const addTransaction = async () => {
         let balance = parseInt(accountDestination.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
         if (balance < amount) {
-            alert("You can't withdraw more than your balance!");
+            notificationAnimation("You can't withdraw more than your balance!", "orange");
             return;
         } else {
             accountDestination.children(".balance").text(balance - amount);
@@ -233,7 +234,7 @@ export const addTransaction = async () => {
         let balanceTo = parseInt(accountTo.children(".balance").text());
         let amount = parseInt(inputTransaction.amount);
         if (balanceFrom < amount) {
-            alert("You can't transfer more than your balance!");
+            notificationAnimation("You can't transfer more than your balance!", "orange");
             return
         } else {
             accountFrom.children(".balance").text(balanceFrom - amount);
@@ -264,8 +265,8 @@ export const addTransaction = async () => {
         }
         $("#selectionCategory").val("default");
         $("#selectionAccounts").val("default");
-        alert("Transaction added!");
-        // console.log("data", data);
+
+        notificationAnimation("Transaction added successfully!", "green");
         return data
 
     });

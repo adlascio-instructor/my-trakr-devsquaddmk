@@ -1,3 +1,5 @@
+import { notificationAnimation } from "../index.js";
+
 export const getAccounts = () => {
     return $.ajax({
         method: "get",
@@ -35,6 +37,7 @@ export const renderAccounts = (account) => {
           <h3 class="account-name">${account.username}</h3>
           <h3 class="balance">0</h3>
         </li>`);
+
 };
 
 export const getNameAccount = (id, accounts) => {
